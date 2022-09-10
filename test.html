@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<!--
+	Made using the template Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	//todo: fix temperature transitions Sim C
+	//todo: 
+	//todo: add hints
+	//todo: 
+-->
+<html>
+<head>
+<title>Test</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="assets/css/main.css" />
+<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+<!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Header -->
+            <header id="header">
+                <div class="inner">
+
+                    <!-- Logo -->
+                        <a href="index.html" class="logo">
+                            <span class="symbol"><img src="images/huberlin-logo.svg" alt="" /></span><span class="title">Allgemeine und Anorganische Chemie</span>
+                        </a>
+
+                    <!-- Nav -->
+                        <nav>
+                            <ul>
+                                <li><a href="#menu">Menu</a></li>
+                                <!-- <li><button id="helpButton" onclick="openHelp()">?</button></li> -->
+                            </ul>
+                        </nav>
+
+                </div>
+            </header>
+
+        <!-- Menu (help in disguise)-->
+            <nav id="menu">
+                <div class="inner">
+                  <h2>Hilfe und Hinweise</h2>
+                    <h3>Konstanten:</h3>
+                    <ul>
+                        <li>Verdampfungsenthalpie von Wasser: 
+                        ΔH<sub>vap</sub> = 43,9 kJ mol<sup>-1</sup></li>
+                        <li>Sublimationsenthalpie von Kohlenstoff: 
+                        ΔH<sub>sub</sub> = 717 kJ mol<sup>-1</sup></li>
+                        <li>Gaskonstante: R = 8,314 J mol<sup>-1</sup> K<sup>-1</sup></li>
+                        <li>Coulomb-Konstante: <em>k</em> = 8,99&middot;10<sup>9</sup> N m<sup>2</sup> C<sup>-2</sup> </li>
+                    </ul>
+                    
+                    <h3>Gleichungen:</h3>
+                    <ul>
+                        <li>Coulombsches Gesetz: F = <em>k</em> (q<sub>1</sub>q<sub>2</sub>)/r<sup>2</sup></li>
+                        <li>Gibbs-Energie: ΔG<sup>o</sup> = ΔH<sup>o</sup> - T &middot;ΔS<sup>o</sup>=-RT&middot;ln(K<sub>eq</sub>)</li>
+                        <li>Arrhenius-Gleichung: <em>k</em> = A &middot; e<sup> - E<sub>a</sub>/RT</sup></li>
+                        <li>Kinetische Energie und Geschwindigkeit: E<sub>K</sub>= ½ &middot;mv<sup>2</sup></li>
+                    </ul>  
+                </div>
+            </nav>
+
+        <!-- Main -->
+            <div id="main">
+                <div class="inner">
+                    <h1>Test</h1>
+                    <div id="chartId"></div>
+                    <p style="margin-bottom: 0.5em"><button id="play-button">Run</button>
+                        &nbsp &nbsp &nbsp [HA] <sub>i</sub> =
+                        <input type="number" min="0" max="1" step="0.050" value="0.100" id="cHA-value">
+                        M &nbsp &nbsp &nbsp  [A<sup>-</sup>] <sub>i</sub> = 
+                        <input type="number" min="0" max="1" step="0.05" value="0.000" id="cA-value">
+                        M &nbsp &nbsp &nbsp &nbsp <span style="font-weight:600">log. Skala</span> <input type="checkbox" id="logScaleCB" name="logScaleCB" checked><label for="logScaleCB"></label>
+                    </p>
+                    <p><button id="addBase-button" disabled>+ Base</button>
+                        <span id="addBase-block" style="font-weight:700; color: rgb(0, 127.5, 204); display:none"> &nbsp &nbsp ← Klicken, um 1 mL 1M NaOH hinzuzufügen!</span></p>
+                <svg class="interactiveGraph" id="simulationC-svg" width="800" height="500"></svg>
+                </div>
+
+        <!-- Footer -->
+            <footer id="footer">
+                <div class="inner">
+                    <ul class="copyright">
+                        <li>&copy; AK Tiemann@ HU-Berlin. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                    </ul>
+                </div>
+            </footer>
+    </div>
+
+<!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/Three49custom.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="assets/js/acidBaseCharts-C.js"></script>
+</body>
+</html>

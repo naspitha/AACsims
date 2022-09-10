@@ -1,0 +1,919 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Hess's Law Demonstration</title>
+    <link type="text/css" href="jquery-ui.custom.css" rel="stylesheet" />
+    <!-- <link type="text/css" href="/assets\css\main.css" " />
+    -->
+    <link type="text/css" href="ide.css" rel="stylesheet" rel="stylesheet" />
+    <!-- <link type="text/css" href="/assets\css\main.css" rel="stylesheet" rel="stylesheet" /> -->
+  </head>
+
+<body>
+    <div id="glowscriptdiv" style="width:100%" class="glowscript">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        
+        <script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
+        <script type="text/javascript" src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
+        <script type="text/javascript" src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
+        <script type="text/javascript">
+        
+        // START JAVASCRIPT
+        (function() {;
+        var ρσ_modules = {};
+        var sel_bond, bond_list, step, systemEnergy, f1, double, setMol, scissorMode, startMol, lasthit, lastcolor, hit, cut_button, AtomsSelected, prevAtom, prevAtomColor, drag, c1_atom, c2_atom, h1_atom, h2_atom, h3_atom, h4_atom, h5_atom, h6_atom, h7_atom, h8_atom, o1_atom, o2_atom, o3_atom, o4_atom, o5_atom, o6_atom, o7_atom, o8_atom, initialized;
+        ρσ_modules.pythonize = {};
+        
+        (function(){
+            function strings() {
+                var string_funcs, exclude, name;
+                string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+                if (!arguments.length) {
+                    exclude = (function(){
+                        var s = ρσ_set();
+                        s.jsset.add("split");
+                        s.jsset.add("replace");
+                        return s;
+                    })();
+                } else if (arguments[0]) {
+                    exclude = Array.prototype.slice.call(arguments);
+                } else {
+                    exclude = null;
+                }
+                if (exclude) {
+                    string_funcs = string_funcs.difference(set(exclude));
+                }
+                var ρσ_Iter0 = string_funcs;
+                ρσ_Iter0 = ((typeof ρσ_Iter0[Symbol.iterator] === "function") ? (ρσ_Iter0 instanceof Map ? ρσ_Iter0.keys() : ρσ_Iter0) : Object.keys(ρσ_Iter0));
+                for (var ρσ_Index0 of ρσ_Iter0) {
+                    name = ρσ_Index0;
+                    (ρσ_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name] = (ρσ_expr_temp = ρσ_str.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name];
+                }
+            };
+            if (!strings.__module__) Object.defineProperties(strings, {
+                __module__ : {value: "pythonize"}
+            });
+        
+            ρσ_modules.pythonize.strings = strings;
+        })();
+        async function __main__() {
+        "use strict";
+            var display = canvas;
+            var scene = canvas();
+            
+            scene.width = document.getElementById("glowscriptdiv").offsetWidth
+        
+            var version, print, arange, __name__, type, ρσ_ls, systemEnergy, step, cut_button, sb_button, db_button, break_all, restart_button, setMol, Egraph, f1, c1_atom, c2_atom, h1_atom, h2_atom, h3_atom, h4_atom, h5_atom, h6_atom, h7_atom, h8_atom, o1_atom, o2_atom, o3_atom, o4_atom, o5_atom, o6_atom, o7_atom, o8_atom, bond_list, scissorMode, sel_bond, lasthit, lastcolor, prevAtom, prevAtomColor, AtomsSelected, clickCounter, hit, drag, startMol;
+            version = ρσ_list_decorate([ "3.2", "glowscript" ]);
+            Array.prototype['+'] = function(r) {return this.concat(r)}
+            Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
+            window.__GSlang = "vpython";
+            print = GSprint;
+            arange = range;
+            __name__ = "__main__";
+            type = pytype;
+            var strings = ρσ_modules.pythonize.strings;
+        
+            strings();
+            "11";
+            "12";
+            scene.background = color.black;
+            "13";
+            scene.range = 10;
+            "14";
+            scene.userspin = false;
+            "16";
+            systemEnergy = 0;
+            "17";
+            step = 0;
+            "20";
+            scene.caption = "";
+            "21";
+            "22";
+            cut_button = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "✄", background: color.white, color: color.black, bind: CutBond, disabled: true})]);
+            "23";
+            sb_button = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "●⚊●", background: color.white, color: color.black, bind: MakeSB, disabled: true})]);
+            "24";
+            db_button = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "●⚌●", background: color.white, color: color.black, bind: MakeDB, disabled: true})]);
+            "26"; break_all = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "●✕●✕●", background: color.white, color: color.black, bind: CutAllBonds})]);
+            "27";
+            restart_button = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "Zurück", background: color.white, color: color.black, bind: restart})]);
+            "28"; 
+            scene.append_to_caption("\n \n Ausgangsmaterialien:");
+            "29"; 
+            setMol = ρσ_interpolate_kwargs.call(this, menu, [ρσ_desugar_kwargs({text: "set moles", choices: ρσ_list_decorate([ "CH4 + 2O2", "2CH4+4O2" ]), bind: setMol, disabled: false})]);
+            "30"; scene.append_to_caption("\n");
+            "31";
+            Egraph = ρσ_interpolate_kwargs.call(this, graph, [ρσ_desugar_kwargs({xtitle: "Schritt", ytitle: "Enthalpieänderung (kJ/mol)", xmin: 0, xmax: 20, ymin: 1["-u"]()["*"](5e3), ymax: 6e3, background: color.white, width:scene.width*0.9, height:scene.width*0.5})]);
+            "35";
+             
+            "36";
+            f1 = ρσ_interpolate_kwargs.call(this, gcurve, [ρσ_desugar_kwargs({graph: Egraph, color: color.red})]);
+            "37"; 
+            f1.plot(step, systemEnergy);
+            "39";
+            c1_atom = c2_atom = null;
+            "40";
+            h1_atom = h2_atom = h3_atom = h4_atom = h5_atom = h6_atom = h7_atom = h8_atom = null;
+            "41";
+            o1_atom = o2_atom = o3_atom = o4_atom = o5_atom = o6_atom = o7_atom = o8_atom = null;
+            "44";
+            bond_list = ρσ_list_decorate([]);
+            "45";
+            (await Init());
+            "48";
+            scissorMode = false;
+            "49";
+            sel_bond = null;
+            "50";
+            lasthit = null;
+            "51";
+            lastcolor = null;
+            "52";
+            prevAtom = null;
+            "53";
+            prevAtomColor = null;
+            "54";
+            AtomsSelected = 0;
+            "55";
+            clickCounter = 0;
+            "56";
+            hit = null;
+            "57";
+            drag = false;
+            "58";
+            startMol = 1;
+            "61";
+            async function CutBond() {
+                var ρσ_ls, enthalpyChange;
+                "62";
+                "63";
+                if ((sel_bond !== null && (typeof sel_bond !== "object" || ρσ_not_equals(sel_bond, null)))) {
+                    "65";
+                    setMol.disabled = true;
+                    "66";
+                    sel_bond.visible = false;
+                    "67";
+                    bond_list.remove(sel_bond);
+                    "68";
+                    (await DisableButton(cut_button));
+                    "69";
+                    if (initialized) {
+                        "70";
+                        step=step["+"](1);
+                        "71";
+                        enthalpyChange = (await BondEnthalpy(ρσ_getitem(sel_bond.atoms, 0), ρσ_getitem(sel_bond.atoms, 1), sel_bond.double));
+                        "72";
+                        systemEnergy=systemEnergy["+"](enthalpyChange);
+                        "73";
+                        f1.plot(step, systemEnergy);
+                    }
+                }
+            };
+            if (!CutBond.__module__) Object.defineProperties(CutBond, {
+                __module__ : {value: null}
+            });
+        
+            "75";
+            async function CutAllBonds() {
+                var ρσ_ls, enthalpyChange, bond;
+                "76";
+                "77";
+                setMol.disabled = true;
+                "78";
+                var ρσ_Iter1 = bond_list;
+                ρσ_Iter1 = ((typeof ρσ_Iter1[Symbol.iterator] === "function") ? (ρσ_Iter1 instanceof Map ? ρσ_Iter1.keys() : ρσ_Iter1) : Object.keys(ρσ_Iter1));
+                for (var ρσ_Index1 of ρσ_Iter1) {
+                    bond = ρσ_Index1;
+                    "79";
+                    step=step["+"](1);
+                    "80";
+                    enthalpyChange = (await BondEnthalpy(ρσ_getitem(bond.atoms, 0), ρσ_getitem(bond.atoms, 1), bond.double));
+                    "81";
+                    systemEnergy=systemEnergy["+"](enthalpyChange);
+                    "82";
+                    f1.plot(step, systemEnergy);
+                    "83";
+                    bond.visible = false;
+                    "84";
+                    bond = undefined;
+                }
+                "85";
+                bond_list = ρσ_list_decorate([]);
+            };
+            if (!CutAllBonds.__module__) Object.defineProperties(CutAllBonds, {
+                __module__ : {value: null}
+            });
+        
+            "87";
+            async function MakeSB() {
+                var ρσ_ls, old_bond, new_bond, enthalpyChange;
+                "88";
+                "91";
+                setMol.disabled = true;
+                "92";
+                var ρσ_Iter2 = bond_list;
+                ρσ_Iter2 = ((typeof ρσ_Iter2[Symbol.iterator] === "function") ? (ρσ_Iter2 instanceof Map ? ρσ_Iter2.keys() : ρσ_Iter2) : Object.keys(ρσ_Iter2));
+                for (var ρσ_Index2 of ρσ_Iter2) {
+                    old_bond = ρσ_Index2;
+                    "93";
+                    if (ρσ_in(ρσ_getitem(old_bond.atoms, 0), sel_bond.atoms) && ρσ_in(ρσ_getitem(old_bond.atoms, 1), sel_bond.atoms)) {
+                        "94";
+                        bond_list.remove(old_bond);
+                    }
+                }
+                "95";
+                new_bond = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({color: color.gray(.8), radius: .05, atoms: sel_bond.atoms, double: false})]);
+                "96";
+                new_bond.append(ρσ_getitem(new_bond.atoms, 0).pos);
+                "97";
+                new_bond.append(ρσ_getitem(new_bond.atoms, 1).pos);
+                "98";
+                bond_list.append(new_bond);
+                "99";
+                (await DisableButton(sb_button));
+                "100";
+                (await DisableButton(db_button));
+                "101";
+                if (initialized) {
+                    "102";
+                    step=step["+"](1);
+                    "103";
+                    enthalpyChange = 1["-u"]()["*"](await ρσ_list_decorate(ρσ_interpolate_kwargs.call(this, BondEnthalpy, [ρσ_getitem(new_bond.atoms, 0), ρσ_getitem(new_bond.atoms, 1)].concat([ρσ_desugar_kwargs({double: false})]))));
+                    "104";
+                    systemEnergy=systemEnergy["+"](enthalpyChange);
+                    "105";
+                    f1.plot(step, systemEnergy);
+                }
+            };
+            if (!MakeSB.__module__) Object.defineProperties(MakeSB, {
+                __module__ : {value: null}
+            });
+        
+            "107";
+            async function MakeDB() {
+                var ρσ_ls, old_bond, pos1, pos2, normal, perp, new_bond, enthalpyChange;
+                "108";
+                "109";
+                setMol.disabled = true;
+                "112";
+                var ρσ_Iter3 = bond_list;
+                ρσ_Iter3 = ((typeof ρσ_Iter3[Symbol.iterator] === "function") ? (ρσ_Iter3 instanceof Map ? ρσ_Iter3.keys() : ρσ_Iter3) : Object.keys(ρσ_Iter3));
+                for (var ρσ_Index3 of ρσ_Iter3) {
+                    old_bond = ρσ_Index3;
+                    "113";
+                    if (ρσ_in(ρσ_getitem(old_bond.atoms, 0), sel_bond.atoms) && ρσ_in(ρσ_getitem(old_bond.atoms, 1), sel_bond.atoms)) {
+                        "114";
+                        old_bond.visible = false;
+                        "115";
+                        bond_list.remove(old_bond);
+                    }
+                }
+                "118";
+                pos1 = ρσ_getitem(sel_bond.atoms, 1).pos;
+                "119";
+                pos2 = ρσ_getitem(sel_bond.atoms, 0).pos;
+                "120";
+                normal = pos2["-"](1["*"](pos1));
+                "121";
+                if ((normal.z !== 0 && (typeof normal.z !== "object" || ρσ_not_equals(normal.z, 0)))) {
+                    "122";
+                    perp = vector(0, 1, 1["-u"]()["*"](normal.y)["/"](normal.z));
+                    "123";
+                } else {
+                    "124";
+                    perp = vector(normal.y, normal.x, 0);
+                }
+                "125";
+                perp=perp["/"](sqrt(Math.pow(perp.x, 2)["+"](Math.pow(perp.y, 2))["+"](Math.pow(perp.z, 2))));
+                "126";
+                perp=perp["*"](.1);
+                "127";
+                new_bond = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({color: color.gray(.8), radius: .05, atoms: sel_bond.atoms, double: true})]);
+                "128";
+                new_bond.append(ρσ_getitem(new_bond.atoms, 0).pos["-"](1["*"](perp)));
+                "129";
+                new_bond.append(ρσ_getitem(new_bond.atoms, 0).pos["+"](perp));
+                "130";
+                new_bond.append(ρσ_getitem(new_bond.atoms, 1).pos["+"](perp));
+                "131";
+                new_bond.append(ρσ_getitem(new_bond.atoms, 1).pos["-"](1["*"](perp)));
+                "132";
+                new_bond.append(ρσ_getitem(new_bond.atoms, 0).pos["-"](1["*"](perp)));
+                "133";
+                bond_list.append(new_bond);
+                "134";
+                (await DisableButton(db_button));
+                "135";
+                (await DisableButton(sb_button));
+                "136";
+                if (initialized) {
+                    "137";
+                    step=step["+"](1);
+                    "138";
+                    enthalpyChange = 1["-u"]()["*"]((await BondEnthalpy(ρσ_getitem(new_bond.atoms, 0), ρσ_getitem(new_bond.atoms, 1), new_bond.double)));
+                    "139";
+                    systemEnergy=systemEnergy["+"](enthalpyChange);
+                    "140";
+                    f1.plot(step, systemEnergy);
+                }
+            };
+            if (!MakeDB.__module__) Object.defineProperties(MakeDB, {
+                __module__ : {value: null}
+            });
+        
+            "142";
+            async function showActive() {
+                var ρσ_ls, bond;
+                "143";
+                "144";
+                print("\n===== \nACTIVE BONDS");
+                "145";
+                if (ρσ_equals(len(bond_list), 0)) {
+                    "146";
+                    print("No active bonds");
+                    "147";
+                } else {
+                    "148";
+                    var ρσ_Iter4 = bond_list;
+                    ρσ_Iter4 = ((typeof ρσ_Iter4[Symbol.iterator] === "function") ? (ρσ_Iter4 instanceof Map ? ρσ_Iter4.keys() : ρσ_Iter4) : Object.keys(ρσ_Iter4));
+                    for (var ρσ_Index4 of ρσ_Iter4) {
+                        bond = ρσ_Index4;
+                        "149";
+                        if ((bond.double === true || typeof bond.double === "object" && ρσ_equals(bond.double, true))) {
+                            "150";
+                            print(ρσ_getitem(bond.atoms, 0).name, "=", ρσ_getitem(bond.atoms, 1).name);
+                            "151";
+                        } else {
+                            "152";
+                            print(ρσ_getitem(bond.atoms, 0).name, "-", ρσ_getitem(bond.atoms, 1).name);
+                        }
+                    }
+                }
+            };
+            if (!showActive.__module__) Object.defineProperties(showActive, {
+                __module__ : {value: null}
+            });
+        
+            "154";
+            async function BondEnthalpy(atom1, atom2, double) {
+                var ρσ_ls, el1, el2;
+                "155";
+                el1 = atom1.el;
+                "156";
+                el2 = atom2.el;
+                "157";
+                if ((el1 === "H" || typeof el1 === "object" && ρσ_equals(el1, "H")) && (el2 === "H" || typeof el2 === "object" && ρσ_equals(el2, "H"))) {
+                    "158";
+                    return 436;
+                    "159";
+                }
+                if ((el1 === "O" || typeof el1 === "object" && ρσ_equals(el1, "O")) && (el2 === "O" || typeof el2 === "object" && ρσ_equals(el2, "O"))) {
+                    "160";
+                    if ((double === true || typeof double === "object" && ρσ_equals(double, true))) {
+                        "161";
+                        return 495;
+                        "162";
+                    } else {
+                        "163";
+                        return 146;
+                        "164";
+                    }
+                }
+                if ((el1 === "C" || typeof el1 === "object" && ρσ_equals(el1, "C")) && (el2 === "C" || typeof el2 === "object" && ρσ_equals(el2, "C"))) {
+                    "165";
+                    if ((double === true || typeof double === "object" && ρσ_equals(double, true))) {
+                        "166";
+                        return 614;
+                        "167";
+                    } else {
+                        "168";
+                        return 348;
+                        "170";
+                    }
+                }
+                if ((el1 === "H" || typeof el1 === "object" && ρσ_equals(el1, "H"))) {
+                    "171";
+                    if ((el2 === "C" || typeof el2 === "object" && ρσ_equals(el2, "C"))) {
+                        "172";
+                        return 413;
+                        "173";
+                    } else if ((el2 === "O" || typeof el2 === "object" && ρσ_equals(el2, "O"))) {
+                        "174";
+                        return 463;
+                        "176";
+                    }
+                }
+                if ((el1 === "C" || typeof el1 === "object" && ρσ_equals(el1, "C"))) {
+                    "177";
+                    if ((el2 === "H" || typeof el2 === "object" && ρσ_equals(el2, "H"))) {
+                        "178";
+                        return 413;
+                        "179";
+                    } else if ((el2 === "O" || typeof el2 === "object" && ρσ_equals(el2, "O"))) {
+                        "180";
+                        if ((double === true || typeof double === "object" && ρσ_equals(double, true))) {
+                            "181";
+                            return 799;
+                            "182";
+                        } else {
+                            "183";
+                            return 358;
+                            "185";
+                        }
+                    }
+                }
+                if ((el1 === "O" || typeof el1 === "object" && ρσ_equals(el1, "O"))) {
+                    "186";
+                    if ((el2 === "H" || typeof el2 === "object" && ρσ_equals(el2, "H"))) {
+                        "187";
+                        return 463;
+                        "188";
+                    } else if ((el2 === "C" || typeof el2 === "object" && ρσ_equals(el2, "C"))) {
+                        "189";
+                        if ((double === true || typeof double === "object" && ρσ_equals(double, true))) {
+                            "190";
+                            return 799;
+                            "191";
+                        } else {
+                            "192";
+                            return 358;
+                        }
+                    }
+                }
+            };
+            if (!BondEnthalpy.__argnames__) Object.defineProperties(BondEnthalpy, {
+                __argnames__ : {value: ["atom1", "atom2", "double"]},
+                __module__ : {value: null}
+            });
+        
+            "194";
+            async function DisableButton(button) {
+                "195";
+                button.background = color.white;
+                "196";
+                button.disabled = true;
+            };
+            if (!DisableButton.__argnames__) Object.defineProperties(DisableButton, {
+                __argnames__ : {value: ["button"]},
+                __module__ : {value: null}
+            });
+        
+            "198";
+            async function EnableButton(btn) {
+                "199";
+                btn.background = color.white;
+                "200";
+                btn.disabled = false;
+            };
+            if (!EnableButton.__argnames__) Object.defineProperties(EnableButton, {
+                __argnames__ : {value: ["btn"]},
+                __module__ : {value: null}
+            });
+        
+            "202";
+            async function toggleScissor() {
+                "203";
+                "204";
+                if (scissorMode) {
+                    "205";
+                    scissorMode = false;
+                    "206";
+                } else {
+                    "207";
+                    scissorMode = true;
+                }
+            };
+            if (!toggleScissor.__module__) Object.defineProperties(toggleScissor, {
+                __module__ : {value: null}
+            });
+        
+            "209";
+            async function setMol(m) {
+                var ρσ_ls, val, oldStartMol;
+                "210";
+                "211";
+                val = m.selected;
+                "212";
+                oldStartMol = startMol;
+                "213";
+                if ((val === "CH4 + 2O2" || typeof val === "object" && ρσ_equals(val, "CH4 + 2O2"))) {
+                    "214";
+                    startMol = 1;
+                    "215";
+                } else if ((val === "2CH4+4O2" || typeof val === "object" && ρσ_equals(val, "2CH4+4O2"))) {
+                    "216";
+                    startMol = 2;
+                    "217";
+                }
+                if ((startMol !== oldStartMol && (typeof startMol !== "object" || ρσ_not_equals(startMol, oldStartMol)))) {
+                    "218";
+                    (await Init());
+                }
+            };
+            if (!setMol.__argnames__) Object.defineProperties(setMol, {
+                __argnames__ : {value: ["m"]},
+                __module__ : {value: null}
+            });
+        
+            "220";
+            async function Select() {
+                var ρσ_ls, bondFound, bond;
+                "221";
+                "222";
+                hit = scene.mouse.pick();
+                "223";
+                if ((AtomsSelected === 0 || typeof AtomsSelected === "object" && ρσ_equals(AtomsSelected, 0))) {
+                    "224";
+                    if ((lasthit !== null && (typeof lasthit !== "object" || ρσ_not_equals(lasthit, null)))) {
+                        "225";
+                        lasthit.color = lastcolor;
+                        "226";
+                    }
+                } else if ((AtomsSelected === 1 || typeof AtomsSelected === "object" && ρσ_equals(AtomsSelected, 1))) {
+                    "227";
+                    if (!(ρσ_instanceof(hit, sphere))) {
+                        "228";
+                        lasthit.color = lastcolor;
+                        "229";
+                        prevAtom = null;
+                        "230";
+                        prevAtomColor = null;
+                        "231";
+                        AtomsSelected = 0;
+                        "232";
+                    }
+                } else {
+                    "233";
+                    AtomsSelected = 0;
+                    "234";
+                    lasthit.color = lastcolor;
+                    "235";
+                    prevAtom.color = prevAtomColor;
+                    "236";
+                    prevAtom = null;
+                    "237";
+                    prevAtomColor = null;
+                    "238";
+                    sel_bond.color = color.gray(.8);
+                    "239";
+                    sel_bond = null;
+                    "241";
+                }
+                if ((hit !== null && (typeof hit !== "object" || ρσ_not_equals(hit, null)))) {
+                    "242";
+                    if ((lasthit !== hit && (typeof lasthit !== "object" || ρσ_not_equals(lasthit, hit)))) {
+                        "243";
+                        lasthit = hit;
+                        "244";
+                        lastcolor = vector(lasthit.color);
+                        "245";
+                    }
+                    if (ρσ_instanceof(hit, curve)) {
+                        "246";
+                        sel_bond = hit;
+                        "247";
+                        if (scissorMode) {
+                            "248";
+                            (await CutBond());
+                            "249";
+                        } else {
+                            "250";
+                            (await EnableButton(cut_button));
+                        }
+                        "251";
+                        hit.color = color.orange;
+                        "252";
+                    } else if (ρσ_instanceof(hit, sphere)) {
+                        "253";
+                        if ((AtomsSelected === 0 || typeof AtomsSelected === "object" && ρσ_equals(AtomsSelected, 0))) {
+                            "254";
+                            prevAtom = hit;
+                            "255";
+                            prevAtomColor = hit.color;
+                        }
+                        "256";
+                        AtomsSelected=AtomsSelected["+"](1);
+                        "257";
+                        (await DisableButton(cut_button));
+                        "258";
+                        hit.color = color.cyan;
+                        "259";
+                        if ((AtomsSelected === 2 || typeof AtomsSelected === "object" && ρσ_equals(AtomsSelected, 2))) {
+                            "260";
+                            if ((hit !== prevAtom && (typeof hit !== "object" || ρσ_not_equals(hit, prevAtom)))) {
+                                "261";
+                                bondFound = false;
+                                "262";
+                                var ρσ_Iter5 = bond_list;
+                                ρσ_Iter5 = ((typeof ρσ_Iter5[Symbol.iterator] === "function") ? (ρσ_Iter5 instanceof Map ? ρσ_Iter5.keys() : ρσ_Iter5) : Object.keys(ρσ_Iter5));
+                                for (var ρσ_Index5 of ρσ_Iter5) {
+                                    bond = ρσ_Index5;
+                                    "263";
+                                    if (ρσ_in(hit, bond.atoms) && ρσ_in(prevAtom, bond.atoms)) {
+                                        "264";
+                                        if ((bond.visible === true || typeof bond.visible === "object" && ρσ_equals(bond.visible, true))) {
+                                            "265";
+                                            sel_bond = bond;
+                                            "266";
+                                            bond.color = color.orange;
+                                            "267";
+                                            (await EnableButton(cut_button));
+                                            "268";
+                                            bondFound = true;
+                                            "269";
+                                        }
+                                    }
+                                }
+                                if (!bondFound) {
+                                    "270";
+                                    sel_bond = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({atoms: ρσ_list_decorate([ hit, prevAtom ])})]);
+                                    "271";
+                                    (await EnableButton(sb_button));
+                                    "272";
+                                    (await EnableButton(db_button));
+                                    "273";
+                                }
+                            } else {
+                                "274";
+                                AtomsSelected = 1;
+                                "275";
+                                prevAtom = lasthit;
+                                "276";
+                                prevAtomColor = lastcolor;
+                                "277";
+                                sel_bond = null;
+                                "279";
+                            }
+                        }
+                    } else {
+                        "280";
+                        (await DisableButton(cut_button));
+                    }
+                    "281";
+                    drag = true;
+                    "283";
+                } else {
+                    "284";
+                    AtomsSelected = 0;
+                    "285";
+                    prevAtom = null;
+                    "286";
+                    prevAtomColor = null;
+                    "287";
+                    if ((lasthit !== null && (typeof lasthit !== "object" || ρσ_not_equals(lasthit, null)))) {
+                        "288";
+                        lasthit.color = lastcolor;
+                        "289";
+                        lasthit = null;
+                    }
+                    "290";
+                    (await DisableButton(cut_button));
+                    "291";
+                    (await DisableButton(sb_button));
+                    "292";
+                    (await DisableButton(db_button));
+                }
+            };
+            if (!Select.__module__) Object.defineProperties(Select, {
+                __module__ : {value: null}
+            });
+        
+            "294";
+            async function mousemove() {
+                var ρσ_ls, offset, bond;
+                "295";
+                "296";
+                if (drag) {
+                    "297";
+                    setMol.disabled = true;
+                    "298";
+                    if (ρσ_instanceof(lasthit, sphere)) {
+                        "299";
+                        lasthit.pos = scene.mouse.pos;
+                        "300";
+                        var ρσ_Iter6 = bond_list;
+                        ρσ_Iter6 = ((typeof ρσ_Iter6[Symbol.iterator] === "function") ? (ρσ_Iter6 instanceof Map ? ρσ_Iter6.keys() : ρσ_Iter6) : Object.keys(ρσ_Iter6));
+                        for (var ρσ_Index6 of ρσ_Iter6) {
+                            bond = ρσ_Index6;
+                            "301";
+                            if (!bond.double) {
+                                "302";
+                                if ((ρσ_getitem(bond.atoms, 0) === lasthit || typeof ρσ_getitem(bond.atoms, 0) === "object" && ρσ_equals(ρσ_getitem(bond.atoms, 0), lasthit))) {
+                                    "303";
+                                    ρσ_interpolate_kwargs.call(bond, bond.modify, [0].concat([ρσ_desugar_kwargs({pos: lasthit.pos})]));
+                                    "304";
+                                }
+                                if ((ρσ_getitem(bond.atoms, 1) === lasthit || typeof ρσ_getitem(bond.atoms, 1) === "object" && ρσ_equals(ρσ_getitem(bond.atoms, 1), lasthit))) {
+                                    "305";
+                                    ρσ_interpolate_kwargs.call(bond, bond.modify, [1].concat([ρσ_desugar_kwargs({pos: lasthit.pos})]));
+                                    "306";
+                                }
+                            } else {
+                                "307";
+                                if ((ρσ_getitem(bond.atoms, 0) === lasthit || typeof ρσ_getitem(bond.atoms, 0) === "object" && ρσ_equals(ρσ_getitem(bond.atoms, 0), lasthit))) {
+                                    "308";
+                                    offset = bond.point(0).pos["-"](1["*"](bond.point(1).pos));
+                                    "309";
+                                    ρσ_interpolate_kwargs.call(bond, bond.modify, [0].concat([ρσ_desugar_kwargs({pos: lasthit.pos["+"](offset["/"](2))})]));
+                                    "310";
+                                    ρσ_interpolate_kwargs.call(bond, bond.modify, [1].concat([ρσ_desugar_kwargs({pos: lasthit.pos["-"](1["*"](offset)["/"](2))})]));
+                                    "311";
+                                    ρσ_interpolate_kwargs.call(bond, bond.modify, [1["-u"]()["*"](1)].concat([ρσ_desugar_kwargs({pos: lasthit.pos["+"](offset["/"](2))})]));
+                                    "312";
+                                }
+                                if ((ρσ_getitem(bond.atoms, 1) === lasthit || typeof ρσ_getitem(bond.atoms, 1) === "object" && ρσ_equals(ρσ_getitem(bond.atoms, 1), lasthit))) {
+                                    "313";
+                                    offset = bond.point(3).pos["-"](1["*"](bond.point(2).pos));
+                                    "314";
+                                    ρσ_interpolate_kwargs.call(bond, bond.modify, [2].concat([ρσ_desugar_kwargs({pos: lasthit.pos["-"](1["*"](offset)["/"](2))})]));
+                                    "315";
+                                    ρσ_interpolate_kwargs.call(bond, bond.modify, [3].concat([ρσ_desugar_kwargs({pos: lasthit.pos["+"](offset["/"](2))})]));
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            if (!mousemove.__module__) Object.defineProperties(mousemove, {
+                __module__ : {value: null}
+            });
+        
+            "317";
+            async function mouseup() {
+                "318";
+                "321";
+                drag = false;
+            };
+            if (!mouseup.__module__) Object.defineProperties(mouseup, {
+                __module__ : {value: null}
+            });
+        
+            "323";
+            scene.bind("mousemove", mousemove);
+            "324";
+            scene.bind("mouseup", mouseup);
+            "325";
+            scene.bind("mousedown", Select);
+            "327";
+            async function Init() {
+                var ρσ_ls, object, bond;
+                "328";
+                "330";
+                initialized = false;
+                "333";
+                var ρσ_Iter7 = ρσ_list_decorate([ c1_atom, c2_atom, h1_atom, h2_atom, h3_atom, h4_atom, h5_atom, h6_atom, h7_atom, h8_atom, o1_atom, o2_atom, o3_atom, o4_atom, o5_atom, o6_atom, o7_atom, o8_atom ]);
+                ρσ_Iter7 = ((typeof ρσ_Iter7[Symbol.iterator] === "function") ? (ρσ_Iter7 instanceof Map ? ρσ_Iter7.keys() : ρσ_Iter7) : Object.keys(ρσ_Iter7));
+                for (var ρσ_Index7 of ρσ_Iter7) {
+                    object = ρσ_Index7;
+                    "334";
+                    if ((object !== null && (typeof object !== "object" || ρσ_not_equals(object, null)))) {
+                        "335";
+                        object.visible = false;
+                        "336";
+                        object = undefined;
+                    }
+                }
+                "337";
+                var ρσ_Iter8 = bond_list;
+                ρσ_Iter8 = ((typeof ρσ_Iter8[Symbol.iterator] === "function") ? (ρσ_Iter8 instanceof Map ? ρσ_Iter8.keys() : ρσ_Iter8) : Object.keys(ρσ_Iter8));
+                for (var ρσ_Index8 of ρσ_Iter8) {
+                    bond = ρσ_Index8;
+                    "339";
+                    bond.visible = false;
+                    "340";
+                    bond = undefined;
+                }
+                "341";
+                bond_list = ρσ_list_decorate([]);
+                "344";
+                c1_atom = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(1["-u"]()["*"](5), 0, 0), color: color.gray(.3), radius: .67, name: "C1", el: "C"})]);
+                "345";
+                h1_atom = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(1["-u"]()["*"](7), 0, 0), color: color.white, radius: .53, name: "H1", el: "H"})]);
+                "346";
+                h2_atom = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(1["-u"]()["*"](3), 0, 0), color: color.white, radius: .53, name: "H2", el: "H"})]);
+                "347";
+                h3_atom = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(1["-u"]()["*"](5), 2, 0), color: color.white, radius: .53, name: "H3", el: "H"})]);
+                "348";
+                h4_atom = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(1["-u"]()["*"](5), 1["-u"]()["*"](2), 0), color: color.white, radius: .53, name: "H4", el: "H"})]);
+                "350";
+                o1_atom = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(0, 1, 0), color: color.red, radius: .48, name: "O1", el: "O"})]);
+                "351";
+                o2_atom = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(0, 1["-u"]()["*"](1), 0), color: color.red, radius: .48, name: "O2", el: "O"})]);
+                "353";
+                o3_atom = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(4, 0, 0), color: color.red, radius: .48, name: "O3", el: "O"})]);
+                "354";
+                o4_atom = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(6, 0, 0), color: color.red, radius: .48, name: "O4", el: "O"})]);
+                "356";
+                if ((startMol === 2 || typeof startMol === "object" && ρσ_equals(startMol, 2))) {
+                    "357";
+                    c2_atom = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(2.5, 5, 0), color: color.gray(.3), radius: .67, name: "C1", el: "C"})]);
+                    "358";
+                    h5_atom = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(.5, 5, 0), color: color.white, radius: .53, name: "H5", el: "H"})]);
+                    "359";
+                    h6_atom = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(4.5, 5, 0), color: color.white, radius: .53, name: "H6", el: "H"})]);
+                    "360";
+                    h7_atom = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(2.5, 3, 0), color: color.white, radius: .53, name: "H7", el: "H"})]);
+                    "361";
+                    h8_atom = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(2.5, 7, 0), color: color.white, radius: .53, name: "H8", el: "H"})]);
+                    "363";
+                    o5_atom = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(1["-u"]()["*"](1), 1["-u"]()["*"](4), 0), color: color.red, radius: .48, name: "O1", el: "O"})]);
+                    "364";
+                    o6_atom = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(1, 1["-u"]()["*"](4), 0), color: color.red, radius: .48, name: "O2", el: "O"})]);
+                    "366";
+                    o7_atom = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(5, 1["-u"]()["*"](3), 0), color: color.red, radius: .48, name: "O3", el: "O"})]);
+                    "367";
+                    o8_atom = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(5, 1["-u"]()["*"](5), 0), color: color.red, radius: .48, name: "O4", el: "O"})]);
+                }
+                "371";
+                sel_bond = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({atoms: ρσ_list_decorate([ c1_atom, h1_atom ]), double: false})]);
+                "372";
+                (await MakeSB());
+                "373";
+                sel_bond = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({atoms: ρσ_list_decorate([ c1_atom, h2_atom ]), double: false})]);
+                "374";
+                (await MakeSB());
+                "375";
+                sel_bond = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({atoms: ρσ_list_decorate([ c1_atom, h3_atom ]), double: false})]);
+                "376";
+                (await MakeSB());
+                "377";
+                sel_bond = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({atoms: ρσ_list_decorate([ c1_atom, h4_atom ]), double: false})]);
+                "378";
+                (await MakeSB());
+                "379";
+                sel_bond = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({atoms: ρσ_list_decorate([ o1_atom, o2_atom ]), double: true})]);
+                "380";
+                (await MakeDB());
+                "381";
+                sel_bond = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({atoms: ρσ_list_decorate([ o3_atom, o4_atom ]), double: true})]);
+                "382";
+                (await MakeDB());
+                "384";
+                if ((startMol === 2 || typeof startMol === "object" && ρσ_equals(startMol, 2))) {
+                    "385";
+                    sel_bond = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({atoms: ρσ_list_decorate([ c2_atom, h5_atom ]), double: false})]);
+                    "386";
+                    (await MakeSB());
+                    "387";
+                    sel_bond = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({atoms: ρσ_list_decorate([ c2_atom, h6_atom ]), double: false})]);
+                    "388";
+                    (await MakeSB());
+                    "389";
+                    sel_bond = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({atoms: ρσ_list_decorate([ c2_atom, h7_atom ]), double: false})]);
+                    "390";
+                    (await MakeSB());
+                    "391";
+                    sel_bond = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({atoms: ρσ_list_decorate([ c2_atom, h8_atom ]), double: false})]);
+                    "392";
+                    (await MakeSB());
+                    "393";
+                    sel_bond = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({atoms: ρσ_list_decorate([ o5_atom, o6_atom ]), double: true})]);
+                    "394";
+                    (await MakeDB());
+                    "395";
+                    sel_bond = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({atoms: ρσ_list_decorate([ o7_atom, o8_atom ]), double: true})]);
+                    "396";
+                    (await MakeDB());
+                }
+                "398";
+                setMol.disabled = false;
+                "399";
+                initialized = true;
+            };
+            if (!Init.__module__) Object.defineProperties(Init, {
+                __module__ : {value: null}
+            });
+        
+            "402";
+            async function restart() {
+                "403";
+                "404";
+                step = 0;
+                "405";
+                systemEnergy = 0;
+                "406";
+                (await Init());
+                "407";
+                f1 = ρσ_interpolate_kwargs.call(this, gcurve, [ρσ_desugar_kwargs({graph: Egraph, color: vec(random(), random(), random())})]);
+                "408";
+                f1.plot(0, systemEnergy);
+            };
+            if (!restart.__module__) Object.defineProperties(restart, {
+                __module__ : {value: null}
+            });
+        
+        };
+        if (!__main__.__module__) Object.defineProperties(__main__, {
+            __module__ : {value: null}
+        });
+  
+        ;$(function(){ window.__context = { glowscript_container: $("#glowscriptdiv")}; __main__() })})()
+        // END JAVASCRIPT
+        
+        //--><!]]></script>
+        </div> 
+</body>
+

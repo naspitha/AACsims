@@ -1,0 +1,147 @@
+* { margin:0; padding:0; } /* to remove the top and left whitespace */
+
+/* canvas tags */
+canvas {
+	height:100%;
+	width:100%;
+	background-color: black;
+}
+
+/* split class */
+.split {
+	margin-right:255px;
+	height:100vh;
+	border: 2px solid black;
+}
+
+/* id=potential */
+#potential {
+	background-color: black;
+	color: white;
+}
+
+#states {
+	background-color: black;
+	color: white;
+}
+
+#atomView {
+	position: relative;  /* so we can center status inside it */
+}
+
+.sidebar {
+	width:250px;
+	position:fixed;
+	top: 0;
+	right: 0;
+}
+body {
+	overflow: hidden;
+}
+
+.slider {
+        width:100%;
+        margin-bottom:8px;
+}
+video {
+        display: none;
+}
+
+select {
+        padding:2px;
+        margin:2px;
+}
+
+#samplesInput {
+	width:40px;
+}
+
+.checkDiv {
+        padding:2px;
+        margin:2px;
+}
+
+button {
+        padding:5px;
+        margin:5px;
+}
+
+.checkbox {
+        margin-bottom:8px;
+}
+
+#selectText {
+	position:absolute;
+	text-align:center;
+	bottom: 20px;
+	left: 0;
+	width: 100%;
+	height: 30px;
+	font-size: 25px;
+	color: yellow;
+}
+
+.gutter {
+    background-color: #222;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.gutter.gutter-vertical {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII=');
+    cursor: row-resize;
+}
+
+.floating-div {
+  position: absolute;
+}
+
+#axesLabelContainer {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  color: white;
+}
+
+
+/* Dropdown Button */
+.dropbtn {
+  cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 240px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+

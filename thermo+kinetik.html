@@ -1,0 +1,316 @@
+<!DOCTYPE HTML>
+<!--
+	Made using the template Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	//todo: fix temperature transitions Sim C
+	//todo: 
+	//todo: add hints
+	//todo: 
+-->
+<html>
+<head>
+<title>Thermodynamik und Kinetik</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="assets/css/main.css" />
+<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+<!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Header -->
+            <header id="header">
+                <div class="inner">
+
+                    <!-- Logo -->
+                        <a href="index.html" class="logo">
+                            <span class="symbol"><img src="images/huberlin-logo.svg" alt="" /></span><span class="title">Allgemeine und Anorganische Chemie</span>
+                        </a>
+
+                    <!-- Nav -->
+                        <nav>
+                            <ul>
+                                <li><a href="#menu">Menu</a></li>
+                            </ul>
+                        </nav>
+
+                </div>
+            </header>
+
+        <!-- Menu (help in disguise)-->
+        <nav id="menu">
+            <div class="inner">
+              <h2>Hilfreiche Informationen</h2>
+                <h3>Konstanten:</h3>
+                <ul>
+                    <li>Verdampfungsenthalpie von Wasser: 
+                    ΔH<sub>vap</sub> = 43,9 kJ mol<sup>-1</sup></li>
+                    <li>Sublimationsenthalpie von Kohlenstoff: 
+                    ΔH<sub>sub</sub> = 717 kJ mol<sup>-1</sup></li>
+                    <li>Gaskonstante: R = 8,314 J mol<sup>-1</sup> K<sup>-1</sup></li>
+                    <li>Coulomb-Konstante: <em>k</em> = 8,99&middot;10<sup>9</sup> N m<sup>2</sup> C<sup>-2</sup> </li>
+                </ul>
+                
+                <h3>Gleichungen:</h3>
+                <ul>
+                    <li>Coulombsches Gesetz: F = <em>k</em> (q<sub>1</sub>q<sub>2</sub>)/r<sup>2</sup></li>
+                    <li>Gibbs-Energie: ΔG<sup>o</sup> = ΔH<sup>o</sup> - T &middot;ΔS<sup>o</sup>=-RT&middot;ln(K<sub>eq</sub>)</li>
+                    <li>Arrhenius-Gleichung: <em>k</em> = A &middot; e<sup> - E<sub>a</sub>/RT</sup></li>
+                    <li>Kinetische Energie und Geschwindigkeit: E<sub>K</sub>= ½ &middot;mv<sup>2</sup></li>
+                </ul>  
+            </div>
+        </nav>
+
+        <!-- Main -->
+            <div id="main">
+                <div class="inner">
+                    <h1>Energieänderungen, Geschwindigkeiten und Gleichgewichte von Reaktionen</h1>
+                </div>
+                <!-- Tabs -->
+                <div class="inner">
+                    <div class="tab" style="margin-top:50px">
+                        <button class="tablinks" onclick="openTab(event, 'simA-cont')">Simulation A</button>
+                        <button class="tablinks" onclick="openTab(event, 'simB-cont')">Simulation B</button>
+                        <button class="tablinks" onclick="openTab(event, 'simC-cont')">Simulation C</button>
+                        <button class="tablinks" onclick="openTab(event, 'simD-cont')">Simulation D</button>
+                    </div>
+                </div>
+                <!-- Activities-->
+                <div class="inner" id="simA-cont" style="display:none">
+                    <h2>Simulation A: Das Bindungspotential </h2>
+                    <p>Das folgende Diagramm zeigt die Abhängigkeit der potenziellen Energie von dem Kernabstand in einem Wasserstoffmolekül oder in einem Fluormolekul.</p>
+                    <h3>Beachte:</h3>
+                    <ul>
+                        <li>
+                            Die Legende dieses Diagramms ist interaktiv und kann verwendet werden, um bestimmte Kurven ein- oder auszublenden. 
+                        </li>
+                        
+                    </ul>
+                    <p><b style="color:brown">Bitte versuch erstmal, die Potenzialkurve für Fluor vorherzusagen (Frage 1f), bevor du dich die tatsächliche Form anschaust!</b> </p>
+                    <div id="simulationA"></div>
+                    <p style="font-size:1em; color:rgb(26, 14, 255); margin-bottom:0; margin-left:0.5em">&copy;N.Spitha, 2022</p>
+                </div>
+                
+                <div class="inner" id="simB-cont" style="display:block; visibility:hidden">
+                    <h2>Simulation B: Hess'sches Gesetz </h2>
+                    <h3>Überblick der Simulation:</h3>
+                    <ul>
+                        <li>
+                            Berühren, halten und ziehen Sie, um Atome zu verschieben.
+                        </li>
+                        <li>
+                            Tippen Sie auf eine Bindung, oder tippen Sie nacheinander auf zwei Atome, um eine Bindung zu brechen (<span style="color:rgb(56, 81, 222); font-size:1.2em">✄</span>). 
+                        </li>
+                        <li>
+                            Tippen Sie nacheinander auf zwei Atome, um eine Einzel- (<span style="color:rgb(56, 81, 222)">●⚊●</span>) oder Doppelbindung (<span style="color:rgb(56, 81, 222)">●⚌●</span>) zu bilden. 
+                        </li>
+                        <li>
+                            Die Enthalpieänderungen werden in der Grafik unten angezeigt. Sie können auch alle Bindungen auf einmal aufbrechen (<span style="color:rgb(56, 81, 222)">●✕●✕●</span>).
+                        </li> 
+                        <li>
+                            Wenn Sie auf "Zurücksetzen" klicken, wird der Pfad von Methan- und Sauerstoffmolekülen neu gestartet.
+                        </li>
+                    </ul>
+                    <h3>Beachte:</h3>
+                    <ul>
+                        <li>
+                            Jedes Molekül in der Simulation entspricht 1 mol von gasformigen Molekülen.
+                        </li>
+                        <li>
+                            Tippen Sie auf eine Bindung, oder tippen Sie nacheinander auf zwei Atome, um eine Bindung zu brechen oder zu bilden. 
+                        </li>
+                        
+                    </ul>
+                    <iframe scrolling="no" id="simulationB" src="assets/glowscript/hessCycEn.html" 
+									style="width: 90%; height:100px"></iframe>
+                </div>
+
+                <div class="inner" id="simC-cont" style="display:block; visibility:hidden">
+                    <h2>Simulation C: Teilchen und Reaktionsgeschwindigkeit</h2>
+                    <p>Die Kollisionstheorie besagt, dass die Geschwindigkeit einer Reaktion proportional zu der Häufigkeit ist, dass die reagierenden Teilchen erfolgreich zusammenstoßen. Eine Voraussetzung einer "erfolgreichen" Kollision ist, dass die Teilchen beim Zusammenstoß eine ausreichend hohe kinetische Energie haben. Die kinetische Energie ist ihrerseits proportional zum Quadrat der Geschwindigkeit eines Teilchens (siehe <em>Hilfreiche Informationen</em>).</p>
+                    <h3>Überblick der Simulation:</h3>
+                    <ul>
+                        <li>Diese Simulation zeigt eine Menge von Teilchen, die sich innerhalb eines Kastens bewegen.</li>
+                        <li>Das begleitende Diagramm zeigt die Geschwindigkeitsverteilung der Teilchen, d.h. die Anzahl von Teilchen, die jede bestimmte Geschwindigkeit besitzen. </li>
+                        <li>
+                            Die Teilchen sind gemäß ihren Geschwindigkeit gefärbt, wobei Teilchen mit höherer Geschwindigkeit röter sind und Teilchen mit niedrigerer Geschwindigkeit blauer sind. 
+                        </li>
+                        <li>
+                            Teilchen, deren Geschwindigkeit höher als die im Diagram definierte "Grenzgeschwindigkeit" ist, sind gelb gefärbt.
+                        </li>
+                        <li>
+                            Sowohl die Temperatur als auch  die Aktivierungsenergie der Reaktion lassen sich mit dem Schieberegler einstellen. 
+                        </li> 
+                    </ul>
+                    <iframe scrolling="no" id="simulationC" src="assets/glowscript/particleKinetics.html" 
+									style="width: 90%; height: 50px"></iframe>
+                    <h3>Beachte:</h3>
+                    <ul>
+                        <li>
+                            Damit ein Zusammenstoß zu einer chemischen Reaktion zwischen Molekülen führen kann, müssen die Moleküle auch eine geeignete Ausrichtung zueinander haben. Dieser Punkt wird offensichtich in der Simulation nicht repräsentiert.  
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="inner" id="simD-cont" style="display:block; visibility: hidden">
+                    <h2>Simulation D: Das Erreichen vom chemischen Gleichgewicht </h2>
+                    <p>In diesem Teil können Sie den Ablauf der folgenden Reaktion beobachten:</p>
+                    <img src="images/reachingEquilibrium_D1.png" style="width: 30%; min-width:200px"
+                    alt = "H2S und CN- reagieren und produzieren HS- und HCN">
+                    <p></p>
+                    <h3>Überblick der Simulation:</h3>
+                    <ul>
+                        <li>
+                            Die Animation zeigt eine Darstellung der Reaktion auf Partikelebene. 
+                            <b>Jedes Teilchen in der Animation kann als 1 μmol von Teilchen betrachtet werden.</b>
+                        </li>
+                        <li>
+                            Das begleitende Diagram verfolgt die Konzentration der Partikel im Laufe der Zeit. 
+                        </li>
+                        <li>
+                            Sie können die Animation jederzeit unterbrechen (<span style="color:rgb(56, 81, 222)">Pause</span>), 
+                            fortsetzen (<span style="color:rgb(56, 81, 222)">Play</span>) und zurücksetzen (<span style="color:rgb(56, 81, 222)">Reset</span>).
+                        </li> 
+                        <li>
+                            Wenn die Animation gestoppt ist, können Sie auf Bereiche des Diagramms tippen, um genaue Werte abzulesen,
+                        </li>
+                    </ul>
+                    <iframe scrolling="no" id="simulationD" src="assets/glowscript/reachingEquilibrium.html" 
+                    style="width: 90%; height: 50px" ></iframe>
+                </div>
+                
+
+            </div>
+
+        <!-- Footer -->
+            <footer id="footer">
+                <div class="inner">
+                    <ul class="copyright">
+                        <li>&copy; AK Tiemann @ HU-Berlin. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                    </ul>
+                </div>
+            </footer>
+    </div>
+
+<!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/Three49custom.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>\
+    <script src="assets/js/LJpotentials.js"></script>
+    <!-- Opening Tabs -->
+    <script> 
+
+        function openTab(evt, objectName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        var simA = document.getElementById("simA-cont");
+        var simB = document.getElementById("simB-cont");
+        var simC = document.getElementById("simC-cont");
+        var simD = document.getElementById("simD-cont");
+        tabcontent = [simA, simB, simC, simD];
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(objectName).style.display = "block";
+        evt.currentTarget.className += " active";
+        
+        
+        if (objectName == "simB-cont") {
+            iframeB = document.getElementById('simulationB')
+            simB.style.visibility="visible"
+
+        }
+
+        if (objectName == "simC-cont") {
+            iframeC = document.getElementById('simulationC')
+            simC.style.visibility = "visible"
+        }
+
+        if (objectName == "simD-cont") {
+            iframeD = document.getElementById('simulationD')
+            simD.style.visibility = "visible"
+        }
+
+        }
+        
+    </script>
+    <!-- Resizing stuff -->
+    <script>
+        function changeClass(object,oldClass,newClass)
+            {
+                // remove:
+                //object.className = object.className.replace( /(?:^|\s)oldClass(?!\S)/g , '' );
+                // replace:
+                var regExp = new RegExp('(?:^|\\s)' + oldClass + '(?!\\S)', 'g');
+                object.className = object.className.replace( regExp , newClass );
+                // add
+                //object.className += " "+newClass;
+            }
+        var divB = document.getElementById("simB-cont")
+        var iframeB = document.getElementById('simulationB')
+        iframeB.onload = function(){
+            iframeB.style.height = iframeB.contentWindow.document.body.scrollHeight+'px'
+            divB.style.display = "none"
+        }
+        var divC = document.getElementById("simC-cont")
+        var iframeC = document.getElementById('simulationC')
+        iframeC.onload = function(){            
+            graphC = iframeC.contentWindow.document.getElementsByClassName('glowscript-canvas-wrapper ui-resizable')[0]
+            graphC.style.padding = "0em 3em"
+            sliders = iframeC.contentWindow.document.getElementsByClassName('ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all')
+            for (let i = 0; i < sliders.length; i++) {
+                    sliders[i].style.height="0.5em";
+                    sliders[i].style.width="5em";
+                    sliders[i].parentNode.style.lineHeight = "1" 
+                            }
+            handles = iframeC.contentWindow.document.getElementsByClassName('ui-slider-handle ui-state-default ui-corner-all')
+            for (let i = 0; i < handles.length; i++) {
+                    handles[i].style.height="0.8em";
+                    handles[i].style.width="0.8em"
+                    handles[i].style.top="-0.15em"
+                    sliders[i].style.padding = "0"    
+                    }
+            // sliders[0].style.height = "0.7em"; sliders[0].style.width = "5em"
+            // sliders.forEach( function(element){element.style.width="2em"})
+            t_temp = iframeC.contentWindow.document.getElementById('1')
+            t_temp.style.fontSize = "0.8em"
+            t_ea = iframeC.contentWindow.document.getElementById('2')
+            t_ea.style.fontSize = "0.8em"
+            t_vel = iframeC.contentWindow.document.getElementById('3')
+            t_vel.style.fontSize = "0.8em"
+            t_vel.style.float = "right"
+            iframeC.style.height = iframeC.contentWindow.document.body.scrollHeight+'px'
+            divC.style.display = "none"
+        }
+            // t_temp.innerHTML= '<span style="font-size:10px">Temperatur</span>'
+        var divD = document.getElementById("simD-cont")
+        var iframeD = document.getElementById('simulationD')
+        iframeD.onload = function(){
+            iframeD.style.height = iframeD.contentWindow.document.body.scrollHeight+'px'
+            divD.style.display = "none"
+            leg_1 = iframeD.contentWindow.document.getElementById('1')
+            leg_1.innerHTML = `<b>[H<sub>2</sub>S] = [CN<sup>-</sup>]</b> <span style="color:rgb(204, 204, 0)">&#11044</span>`;
+            leg_2 = iframeD.contentWindow.document.getElementById('2')
+            leg_2.innerHTML = `<b>[HCN] = [HS<sup>-</sup>]</b> <span style="color:rgb(0, 204, 204)">&#11044</span>`;
+            leg_2.style.padding = "0em 1em"
+            graph = iframeD.contentWindow.document.getElementsByClassName('glowscript-canvas-wrapper ui-resizable ui-resizable-disabled')[0]
+            graph.style.padding = "0em 2em"
+        }
+    </script>
+</body>
+</html>

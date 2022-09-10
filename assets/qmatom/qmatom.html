@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Hydrogen Atom Orbital Viewer</title>
+    <link rel="stylesheet" href="qmatom.css" type="text/css">
+  </head>
+
+  <body>
+    <div class="split">
+      <div id="potentialView">
+        <canvas id="potentialCanvas"></canvas>
+      </div>
+      <div id="atomView">
+        <canvas id="atomCanvas"></canvas>
+        <div id="axesLabelContainer">
+          <div id="xLabel" class="floating-div">x</div>
+          <div id="yLabel" class="floating-div">y</div>
+          <div id="zLabel" class="floating-div">z</div>
+        </div>
+        <div id="selectText"></div>
+      </div>
+      <div id="lView">
+        <canvas id="lCanvas"></canvas>
+      </div>
+      <div id="l2View">
+        <canvas id="l2Canvas"></canvas>
+      </div>
+      <div id="radialView">
+        <canvas id="radialCanvas"></canvas>
+      </div>
+      <div id="statesView">
+        <canvas id="statesCanvas"></canvas>
+      </div>
+    </div>
+    <div class="sidebar">
+      <p style="display:none"><select id="viewChooser">
+        <option selected>Real Orbitals (chemistry)</option>
+        <option>Complex Orbitals (physics)</option>
+        <option>Real Combinations (n = 1-4)</option>
+        <option>Complex Combos (n = 1-4)</option>
+        <option>Multiple Bases (n = 2, l = 1)</option>
+        <option>Multiple Bases (n = 3, l = 1)</option>
+        <option>Multiple Bases (n = 3, l = 2)</option>
+        <option>Multiple Bases (n = 4, l = 1)</option>
+        <option>Multiple Bases (n = 4, l = 2)</option>
+        <option>Multiple Bases (n = 4, l = 3)</option>
+        <option>Hybrid Bases</option>
+      </select></p>
+      <div id="nlmChooserDiv">
+      <select id="nChooser">
+      <option>n = 1</option>
+      <option>n = 2</option>
+      <option>n = 3</option>
+      <option>n = 4</option>
+      <option>n = 5</option>
+      <option>n = 6</option>
+      <option>n = 7</option>
+      <option>n = 8</option>
+      <option>n = 9</option>
+      <option>n = 10</option>
+      <option>n = 11</option>
+      <option>n = 12</option>
+      <option>n = 13</option>
+      <option>n = 14</option>
+      <option>n = 15</option>
+      <option>n = 16</option>
+      </select><br>
+      <select id="lChooser"> </select><br>
+      <select id="mChooser"> </select><br>
+      </div>
+      <select id="sliceChooser">
+      <option>3D-Ansicht</option>
+      <option>X-Slice</option>
+      <option>Y-Slice</option>
+      <option>Z-Slice</option>
+      </select><br>
+      <div id="stateButtonsDiv" style="display:none">
+      <select id="modeChooser">
+      <option>Mouse = Adjust View</option>
+      <option>Mouse = Rotate X</option>
+      <option>Mouse = Rotate Y</option>
+      <option>Mouse = Rotate Z</option>
+      </select><br>
+      <button id="clear">Clear</button><br>
+      <button id="normalize">Normalize</button><br>
+      <button id="maximize">Maximize</button><br>
+      </div>
+      <p></p>
+      <button id="zoomin" style="display:none">Zoom In</button>
+      <button id="zoomout" style="display:none">Zoom Out</button><br>
+      <div class="dropdown" style="display:none">
+        <button id="settings" class="dropbtn">Settings</button>
+        <div id="settingsDropdown" class="dropdown-content">
+        <div class="checkDiv">View Energy: <input type="checkbox" id="energyCheck"></div>
+        <div class="checkDiv">View Angular Momentum: <input type="checkbox" id="lCheck"></div>
+        <!---<div class="checkDiv">View Angular Momentum<sup>2</sup>: <input type="checkbox" id="l2Check"></div>-->
+        <div class="checkDiv">View Radial Distribution: <input type="checkbox" id="radialCheck" checked></div>
+        <div class="checkDiv">View Phase as Color: <input type="checkbox" id="phaseColorCheck" checked></div>
+        <div class="checkDiv">Show Cubic f Orbitals: <input type="checkbox" id="cubicCheck"></div>
+        <div class="checkDiv">Show Axes: <input type="checkbox" id="axesCheck" checked></div>
+        <div class="checkDiv">Show Components: <input type="checkbox" id="componentsCheck"></div>
+        <div class="checkDiv">Auto Scaling: <input type="checkbox" id="autoScaleCheck" checked></div>
+        <div class="checkDiv">Animated Scaling: <input type="checkbox" id="animScaleCheck" checked></div>
+        <div class="checkDiv">Number of Samples: <input type="number" id="samplesInput" max="256" value="64"></div>
+        <div class="checkDiv">Show Real Part: <input type="checkbox" id="realCheck" checked></div>
+        <div class="checkDiv">Show Imaginary Part: <input type="checkbox" id="imaginaryCheck" checked></div>
+        </div>
+      </div>
+      <br>
+      <div class="checkDiv" style="display:none">Stopped: <input type="checkbox" id="stoppedCheck"></div>
+      <br>
+      Simulationsgeschwindigkeit:
+      <input type="range" min = "1" max="100" value="50" class="slider" id="speed">
+      <br>
+      Heiligkeit:
+      <input type="range" min = "-400" max="3000" value="1340" class="slider" id="brightness">
+      <br>
+      <br>
+      &nbsp;<br>
+      <div id="values" style="display:none">
+      One rotation per ...<br>
+      Particle speed: 123 m/s<br>
+      Coriolis accel: 123 m/s^2<br>    
+      t = ...<br>
+      </div>
+      <br><a target="stateLink" id="stateLink" href="http://www.falstad.com/qmatom/" target="_blank">Original-Simulation</a>
+    </div>
+  </body>
+
+  <script src="gl-matrix.js"></script>
+  <script src="webgl-obj-loader.min.js"></script>
+  <script type="module" src="qmatom.js"></script>
+</html>
