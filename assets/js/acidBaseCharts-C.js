@@ -27,7 +27,7 @@ var kF = 0.5, kR = kF/Ka
 // var kFb = kF*Kb/Ka, kRb = kFb/Kb
 var kFb = 0, kRb = 0
 var xy = [{"t":tOld, "cHA":HAOld, "cA": AOld, "cH3O":H3OOld, "cOH":OHOld}]
-var addedBaseAmt = 5e-3 // in moles/L
+var addedBaseAmt = 10e-3 // in moles/L
 var baseAdded=false
 var addingBaseNow=false
 var logScaleOn = true

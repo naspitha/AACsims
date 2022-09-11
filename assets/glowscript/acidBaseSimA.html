@@ -1,0 +1,1156 @@
+<!--
+	Javascript code auto-converted from glowscript.org. Original program at:
+    https://www.glowscript.org/#/user/naspitha/folder/AACSims/program/speedDist
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Particle Kinetics</title>
+    <link type="text/css" href="jquery-ui.custom.css" rel="stylesheet" />
+    <link type="text/css" href="ide.css" rel="stylesheet" rel="stylesheet" />
+  </head>
+
+<body>
+    <div id="glowscript" class="glowscript">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script type="text/javascript" src="jquery-ui.custom.min.js"></script>
+        <script type="text/javascript" src="glow.3.2.min.js"></script>
+        <script type="text/javascript" src="RSrun.3.2.min.js"></script>
+        <script type="text/javascript">
+
+    var window_width = document.getElementById("glowscript").offsetWidth 
+    // START JAVASCRIPT
+    ;(function() {;
+    var ρσ_modules = {};
+    var running, a, A_list, B_list, t, t_i, nHA, nA, nHHB, nB, nHAT, nAT, nHB;
+    ρσ_modules.pythonize = {};
+
+    (function(){
+        function strings() {
+            var string_funcs, exclude, name;
+            string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+            if (!arguments.length) {
+                exclude = (function(){
+                    var s = ρσ_set();
+                    s.jsset.add("split");
+                    s.jsset.add("replace");
+                    return s;
+                })();
+            } else if (arguments[0]) {
+                exclude = Array.prototype.slice.call(arguments);
+            } else {
+                exclude = null;
+            }
+            if (exclude) {
+                string_funcs = string_funcs.difference(set(exclude));
+            }
+            var ρσ_Iter0 = string_funcs;
+            ρσ_Iter0 = ((typeof ρσ_Iter0[Symbol.iterator] === "function") ? (ρσ_Iter0 instanceof Map ? ρσ_Iter0.keys() : ρσ_Iter0) : Object.keys(ρσ_Iter0));
+            for (var ρσ_Index0 of ρσ_Iter0) {
+                name = ρσ_Index0;
+                (ρσ_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name] = (ρσ_expr_temp = ρσ_str.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name];
+            }
+        };
+        if (!strings.__module__) Object.defineProperties(strings, {
+            __module__ : {value: "pythonize"}
+        });
+
+        ρσ_modules.pythonize.strings = strings;
+    })();
+    async function __main__() {
+    "use strict";
+        var display = canvas;
+        var scene = canvas();
+        fontloading();
+        await waitforfonts();
+
+        var version, print, arange, __name__, type, ρσ_ls, win, side, A_tot, nHAi, B_tot, nHHBi, nBi, A_rad, B_rad, H_rad, HA_clr, A_clr, HHB_clr, HB_clr, B_clr, H_clr, particle_speed, time_limit, t_rand, real_time, dt, running, durSleep, K_A, K_B, K, Kb, p_HA_A, p_A_HA, p_Ab_HA, p_HA_Ab, f_A_HA, partscreen, container, pPwidth, pPheight, a, b, pos, c, d, ps, pauseText, replayText, pauseBgnd, nHA, nHHB, nB, nA, nHB, nHAT, nAT, Cgraph, fHA, fA, fHHB, fB, fHAT, fAT, resetButton, checkHA, checkHHB, A_list, B_list, ion_pos, theta, vel, proton_pos, proton2_pos, visible, clr, gA, i, H1_theta, H1_pos, H2_theta, H2_pos, H3_theta, H3_pos, turndir, visible1, visible2, opacity, gB, t, t_i, g1, beta, x1, y1, hitlist, c1, c2, v1, v2, vtot, vrel, rrel, dx, dy, alpha, d_in, deltat, pcm1, pcm2, g2, center, newtheta, H, k_A_HA, k_HA_A, nHHBT;
+        version = ρσ_list_decorate([ "3.2", "glowscript" ]);
+        Array.prototype['+'] = function(r) {return this.concat(r)}
+        Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
+        window.__GSlang = "vpython";
+        print = GSprint;
+        arange = range;
+        __name__ = "__main__";
+        type = pytype;
+        var strings = ρσ_modules.pythonize.strings;
+
+        strings();
+        "11";
+        win = window_width*0.4;
+        "12";
+        side = 20;
+        "13";
+        A_tot = 100;
+        "14";
+        nHAi = 100;
+        "15";
+        B_tot = A_tot;
+        "16";
+        nHHBi = 0;
+        nBi = 0;
+        "17";
+        A_rad = .4;
+        "18";
+        B_rad = .4;
+        "19";
+        H_rad = .2;
+        "20";
+        HA_clr = vec(0, .8, .8);
+        A_clr = vec(0, .5, .8);
+        "21";
+        HHB_clr = vec(.8, 0, 0);
+        HB_clr = vec(.8, .5, .5);
+        B_clr = vec(.8, .3, 0);
+        "22";
+        H_clr = vec(.9, .9, .9);
+        "23";
+        particle_speed = 2;
+        "24";
+        time_limit = 150;
+        "25";
+        t_rand = 10;
+        "26";
+        real_time = 5e-4["/"](.001);
+        "27";
+        dt = .05;
+        "28";
+        running = true;
+        "29";
+        durSleep = 10;
+        "31";
+        K_A = 1.8e-5;
+        "32";
+        K_B = 1e-14["/"](K_A);
+        "33";
+        K = K_A["/"](B_tot["*"](1e-6))["/"](5.5);
+        "34";
+        Kb = K_B["/"](B_tot["*"](1e-6))["/"](5.5);
+        "35";
+        p_HA_A = K["/"](K["+"](1));
+        "36";
+        p_A_HA = 1["/"](K["+"](1));
+        "37";
+        p_Ab_HA = Kb["/"](Kb["+"](1));
+        "38";
+        p_HA_Ab = 1["/"](Kb["+"](1));
+        "39";
+        f_A_HA = 1e7;
+        "41";
+        partscreen = ρσ_interpolate_kwargs.call(this, canvas, [ρσ_desugar_kwargs({width: win, height: win, align: "left", background: vec(.1, .1, .1), userzoom: false, userspin: false, userpan: false, resizable: false})]);
+        "43";
+        partscreen.range = side["*"](.5);
+        "44";
+        container = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({pos: ρσ_list_decorate([ vec(1["-u"]()["*"](side)["/"](2), side["/"](2), 0), vec(side["/"](2), side["/"](2), 0), vec(side["/"](2), 1["-u"]()["*"](side)["/"](2), 0), vec(1["-u"]()["*"](side)["/"](2), 1["-u"]()["*"](side)["/"](2), 0), vec(1["-u"]()["*"](side)["/"](2), side["/"](2), 0) ]), color: vec(.3, .3, .5), radius: .05, emissive: true, visible: false})]);
+        "48";
+        pPwidth = side["/"](6);
+        pPheight = side["/"](14);
+        "49";
+        a = vec(1["-u"]()["*"](side)["/"](2)["*"](.9), side["/"](2)["*"](.9), .5);
+        "50";
+        b = pos = vec(1["-u"]()["*"](side)["/"](2)["*"](.95)["+"](pPwidth), side["/"](2)["*"](.95), .5);
+        "51";
+        c = pos = vec(1["-u"]()["*"](side)["/"](2)["*"](.95)["+"](pPwidth), side["/"](2)["*"](.95)["-"](1["*"](pPheight)), .5);
+        "52";
+        d = ps = vec(1["-u"]()["*"](side)["/"](2)["*"](.95), side["/"](2)["*"](.95)["-"](1["*"](pPheight)), .5);
+        "54";
+        pauseText = ρσ_interpolate_kwargs.call(this, text, [ρσ_desugar_kwargs({pos: vec(0, 1["-u"]()["*"](side)["/"](50), 1.1), text: "||", color: vec(1, 1, 1), height: side["/"](25), align: "center", visible: false})]);
+        "55";
+        replayText = ρσ_interpolate_kwargs.call(this, text, [ρσ_desugar_kwargs({pos: vec(0, 1["-u"]()["*"](side)["/"](50), 1.1), text: "Replay", color: vec(1, 1, 1), height: side["/"](25), align: "center", visible: false})]);
+        "56";
+        pauseBgnd = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: vec(0, 0, 1), width: .5, height: side, length: side, color: color.white, opacity: .4, emissive: true, visible: false})]);
+        "59";
+        nHA = nHAi;
+        nHHB = nHHBi;
+        nB = nBi;
+        "60";
+        nA = A_tot["-"](1["*"](nHA));
+        nHB = B_tot["-"](1["*"](nHHB))["-"](1["*"](nB));
+        "61";
+        nHAT = nHA["*"](1e-6);
+        nAT = nA["*"](1e-6);
+        "62";
+        Cgraph = ρσ_interpolate_kwargs.call(this, graph, [ρσ_desugar_kwargs({title: " ", xtitle: "Zeit (ms)", ytitle: "Konzentration (μmol/L)", xmin: 0, xmax: real_time, ymin: 1["-u"]()["*"](1), ymax: max(ρσ_list_decorate([ A_tot, B_tot ]))["*"](1.2), background: color.white, align: "left", width: win*5/4, height: win*0.8})]);
+        "65";
+        fHA = ρσ_interpolate_kwargs.call(this, gcurve, [ρσ_desugar_kwargs({graph: Cgraph, color: HA_clr, interval: 10, width: 3, label: "[HA]"})]);
+        "66";
+        fA = ρσ_interpolate_kwargs.call(this, gcurve, [ρσ_desugar_kwargs({graph: Cgraph, color: A_clr, label: "[A<sup>-<\/sup>]", interval: 10, visible: true, width: 3})]);
+        "67";
+        fHHB = ρσ_interpolate_kwargs.call(this, gcurve, [ρσ_desugar_kwargs({graph: Cgraph, color: HHB_clr, interval: 10, visible: true, width: 3, label: "[H<sub>3</sub>O<sup>+</sup>]", visible: false})]);
+        "68";
+        fB = ρσ_interpolate_kwargs.call(this, gcurve, [ρσ_desugar_kwargs({graph: Cgraph, color: B_clr, label: "[B]", interval: 10, visible: false, width: 3})]);
+        "69";
+        fHAT = ρσ_interpolate_kwargs.call(this, gdots, [ρσ_desugar_kwargs({graph: Cgraph, color: vec(0, .4, .4), label: "[HA]<sub>theor.</sub>", interval: 5, visible: true, radius: .5})]);
+        "70";
+        fAT = ρσ_interpolate_kwargs.call(this, gdots, [ρσ_desugar_kwargs({graph: Cgraph, color: vec(0, .25, .4), label: "[A-]<sub>theor.</sub>", interval: 5, visible: true, radius: .5})]);
+        "71";
+        ρσ_interpolate_kwargs.call(this, wtext, [ρσ_desugar_kwargs({text: "     ", pos: Cgraph.title_anchor, background: HHB_clr})]);
+        "72";
+        resetButton = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({pos: Cgraph.title_anchor, text: "Zurücksetzen", bind: Reset})]);
+        "73";
+        ρσ_interpolate_kwargs.call(this, wtext, [ρσ_desugar_kwargs({text: "\n      anzeigen: ", pos: Cgraph.title_anchor, background: HHB_clr})]);
+        "74";
+        checkHA = ρσ_interpolate_kwargs.call(this, checkbox, [ρσ_desugar_kwargs({text: "[HA]", pos: Cgraph.title_anchor, bind: toggleHA, checked: true})]);
+        "75";
+        checkHA = ρσ_interpolate_kwargs.call(this, checkbox, [ρσ_desugar_kwargs({text: "[A<sup>-</sup>]", pos: Cgraph.title_anchor, bind: toggleA, checked: true})]);
+        "76";
+        checkHHB = ρσ_interpolate_kwargs.call(this, checkbox, [ρσ_desugar_kwargs({text: "[H<sub>3</sub>O<sup>+</sup>]", pos: Cgraph.title_anchor, bind: toggleHHB, checked: false})]);
+        "78";
+        fHA.plot(0, nHA);
+        "79";
+        fA.plot(0, nA);
+        "80";
+        fHHB.plot(0, nHHB);
+        "81";
+        fB.plot(0, nB);
+        "82";
+        fHAT.plot(0, nHAT["/"](1e-6));
+        "83";
+        fAT.plot(0, nAT["/"](1e-6));
+        "85";
+        async function toggleHA() {
+            fHA.visible = !fHA.visible;
+        };
+        if (!toggleHA.__module__) Object.defineProperties(toggleHA, {
+            __module__ : {value: null}
+        });
+
+        "86";
+        async function toggleA() {
+            fA.visible = !fA.visible;
+        };
+        if (!toggleA.__module__) Object.defineProperties(toggleA, {
+            __module__ : {value: null}
+        });
+
+        "87";
+        async function toggleHHB() {
+            fHHB.visible = !fHHB.visible;
+        };
+        if (!toggleHHB.__module__) Object.defineProperties(toggleHHB, {
+            __module__ : {value: null}
+        });
+
+        "90";
+        A_list = ρσ_list_decorate([]);
+        B_list = ρσ_list_decorate([]);
+        "91";
+        for (var ρσ_Index1 = 0; ρσ_Index1["<"](A_tot); ρσ_Index1++) {
+            i = ρσ_Index1;
+            "92";
+            ion_pos = vec(1["-u"]()["*"](side)["/"](2)["+"](side["*"](random())), 1["-u"]()["*"](side)["/"](2)["+"](side["*"](random())), 0);
+            "93";
+            theta = random()["*"](pi)["*"](2);
+            "94";
+            vel = vec(particle_speed["*"](cos(theta)), particle_speed["*"](sin(theta)), 0);
+            "95";
+            proton_pos = ion_pos["+"](vec(A_rad["/"](sqrt(2)), A_rad["/"](sqrt(2)), 0));
+            "96";
+            proton2_pos = ion_pos["+"](vec(1["-u"]()["*"](A_rad), 0, 0));
+            "97";
+            if (i["<"](nHA)) {
+                "98";
+                visible = true;
+                "99";
+                clr = HA_clr;
+                "100";
+            } else {
+                "101";
+                visible = false;
+                "102";
+                clr = A_clr;
+            }
+            "103";
+            gA = ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({radius: A_rad, color: clr, pos: ion_pos, species: "A", opacity: .7, vel: vel, sleepCounter: 0})]), ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({radius: H_rad, color: H_clr, pos: proton_pos, species: "H", visible: visible})]) ]);
+            "107";
+            A_list.append(gA);
+        }
+        "109";
+        for (var ρσ_Index2 = 0; ρσ_Index2["<"](B_tot); ρσ_Index2++) {
+            i = ρσ_Index2;
+            "110";
+            ion_pos = vec(1["-u"]()["*"](side)["/"](2)["+"](side["*"](random())), 1["-u"]()["*"](side)["/"](2)["+"](side["*"](random())), 0);
+            "111";
+            theta = random()["*"](pi)["*"](2);
+            "112";
+            vel = vec(particle_speed["*"](cos(theta)), particle_speed["*"](sin(theta)), 0);
+            "115";
+            H1_theta = random()["*"](pi)["*"](2);
+            H1_pos = ion_pos["+"](B_rad["*"](.8)["*"](vec(cos(H1_theta), sin(H1_theta), 0)));
+            "116";
+            H2_theta = H1_theta["+"](2["*"](pi)["/"](3));
+            H2_pos = ion_pos["+"](B_rad["*"](.8)["*"](vec(cos(H2_theta), sin(H2_theta), 0)));
+            "117";
+            H3_theta = H2_theta["+"](2["*"](pi)["/"](3));
+            H3_pos = ion_pos["+"](B_rad["*"](.8)["*"](vec(cos(H3_theta), sin(H3_theta), 0)));
+            "118";
+            if (ρσ_equals(i["%"](2), 0)) {
+                turndir = 1;
+            } else {
+                turndir = 1["-u"]()["*"](1);
+            }
+            "120";
+            if (i["<"](nHHB)) {
+                "121";
+                visible1 = true;
+                "122";
+                visible2 = true;
+                "123";
+                clr = HHB_clr;
+                "124";
+                opacity = 1;
+                "125";
+            } else {
+                "126";
+                visible1 = false;
+                "127";
+                if (i["<"](nHHB["+"](nB))) {
+                    "128";
+                    visible2 = false;
+                    "129";
+                    clr = B_clr;
+                    "130";
+                    opacity = 1;
+                    "131";
+                } else {
+                    "132";
+                    visible2 = true;
+                    "133";
+                    clr = HB_clr;
+                    "134";
+                    opacity = .5;
+                }
+            }
+            "135";
+            gB = ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({radius: B_rad, color: clr, pos: ion_pos, species: "B", opacity: opacity, vel: vel, sleepCounter: 0, turndir: turndir})]), ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({radius: H_rad, color: H_clr, pos: H1_pos, species: "H", theta: H1_theta, visible: visible1})]), ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({radius: H_rad, color: H_clr, pos: H2_pos, species: "H", theta: H2_theta, visible: visible2})]), ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({radius: H_rad, color: H_clr, pos: H3_pos, species: "H", theta: H3_theta})]) ]);
+            "141";
+            B_list.append(gB);
+        }
+        "143";
+        async function PlayPause() {
+            "144";
+            "145";
+            running = !running;
+            "146";
+            if (replayText.visible) {
+                "147";
+                replayText.visible = false;
+                "148";
+                (await Reset());
+                "149";
+            }
+            if (running) {
+                "150";
+                pauseBgnd.visible = false;
+                "151";
+                pauseText.visible = false;
+                "152";
+            } else {
+                "153";
+                pauseBgnd.visible = true;
+                "154";
+                pauseText.visible = true;
+                "155";
+            }
+            if (false) {
+                "156";
+                if ((playPauseText.text === "Replay" || typeof playPauseText.text === "object" && ρσ_equals(playPauseText.text, "Replay"))) {
+                    "157";
+                    (await Reset());
+                    "158";
+                }
+                if (running) {
+                    "159";
+                    playPauseText.text = "Pause";
+                    "160";
+                    playPauseBox.color = vec(.7, 0, 0);
+                    "161";
+                } else {
+                    "162";
+                    playPauseText.text = "Play";
+                    "163";
+                    playPauseBox.color = vec(0, .7, 0);
+                }
+            }
+        };
+        if (!PlayPause.__module__) Object.defineProperties(PlayPause, {
+            __module__ : {value: null}
+        });
+
+        "165";
+        async function Reset() {
+            var ρσ_ls, nHB, ion_pos, theta, vel, proton_pos, visible, clr, i, visible1, visible2, opacity, d, f;
+            "166";
+            "167";
+            nHA = nHAi;
+            nHHB = nHHBi;
+            nB = nBi;
+            "168";
+            nA = A_tot["-"](1["*"](nHA));
+            nHB = B_tot["-"](1["*"](nHHB))["-"](1["*"](nB));
+            "169";
+            nHAT = nHA["*"](1e-6);
+            nAT = nA["*"](1e-6);
+            "170";
+            fHA.remove();
+            fA.remove();
+            fHHB.remove();
+            fB.remove();
+            "171";
+            fHAT.remove();
+            fAT.remove();
+            "172";
+            Cgraph.xmax = real_time;
+            "173";
+            Cgraph.ymax = max(A_tot, B_tot)["*"](1.2);
+            "174";
+            for (var ρσ_Index3 = 0; ρσ_Index3["<"](A_tot); ρσ_Index3++) {
+                i = ρσ_Index3;
+                "175";
+                ion_pos = vec(1["-u"]()["*"](side)["/"](2)["+"](side["*"](random())), 1["-u"]()["*"](side)["/"](2)["+"](side["*"](random())), 0);
+                "176";
+                theta = random()["*"](pi)["*"](2);
+                "177";
+                vel = vec(particle_speed["*"](cos(theta)), particle_speed["*"](sin(theta)), 0);
+                "178";
+                proton_pos = ion_pos["+"](vec(A_rad["/"](sqrt(2)), A_rad["/"](sqrt(2)), 0));
+                "179";
+                if (i["<"](nHA)) {
+                    "180";
+                    visible = true;
+                    "181";
+                    clr = HA_clr;
+                    "182";
+                } else {
+                    "183";
+                    visible = false;
+                    "184";
+                    clr = A_clr;
+                }
+                "185";
+                ρσ_getitem(ρσ_getitem(A_list, i), 0).pos = ion_pos;
+                "186";
+                ρσ_getitem(ρσ_getitem(A_list, i), 1).pos = proton_pos;
+                "187";
+                ρσ_getitem(ρσ_getitem(A_list, i), 1).visible = visible;
+                "188";
+                ρσ_getitem(ρσ_getitem(A_list, i), 0).color = clr;
+            }
+            "189";
+            for (var ρσ_Index4 = 0; ρσ_Index4["<"](B_tot); ρσ_Index4++) {
+                i = ρσ_Index4;
+                "190";
+                ion_pos = vec(1["-u"]()["*"](side)["/"](2)["+"](side["*"](random())), 1["-u"]()["*"](side)["/"](2)["+"](side["*"](random())), 0);
+                "191";
+                theta = random()["*"](pi)["*"](2);
+                "192";
+                vel = vec(particle_speed["*"](cos(theta)), particle_speed["*"](sin(theta)), 0);
+                "193";
+                proton_pos = ion_pos["+"](vec(B_rad["/"](sqrt(2)), B_rad["/"](sqrt(2)), 0));
+                "194";
+                if (i["<"](nHHB)) {
+                    "195";
+                    visible1 = true;
+                    "196";
+                    visible2 = true;
+                    "197";
+                    clr = HHB_clr;
+                    "198";
+                    opacity = 1;
+                    "199";
+                } else {
+                    "200";
+                    visible1 = false;
+                    "201";
+                    if (i["<"](nHHB["+"](nB))) {
+                        "202";
+                        visible2 = false;
+                        "203";
+                        clr = B_clr;
+                        "204";
+                        opacity = 1;
+                        "205";
+                    } else {
+                        "206";
+                        visible2 = true;
+                        "207";
+                        clr = HB_clr;
+                        "208";
+                        opacity = .5;
+                    }
+                }
+                "209";
+                d = ion_pos["-"](1["*"](ρσ_getitem(ρσ_getitem(B_list, i), 0).pos));
+                "210";
+                (await move_x(ρσ_getitem(B_list, i), d.x));
+                "211";
+                (await move_y(ρσ_getitem(B_list, i), d.y));
+                "212";
+                ρσ_getitem(ρσ_getitem(B_list, i), 1).opacity = opacity;
+                "213";
+                ρσ_getitem(ρσ_getitem(B_list, i), 1).visible = visible1;
+                "214";
+                ρσ_getitem(ρσ_getitem(B_list, i), 2).visible = visible2;
+                "215";
+                ρσ_getitem(ρσ_getitem(B_list, i), 0).color = clr;
+            }
+            "216";
+            t = 0;
+            t_i = 0;
+            "217";
+            f = 0;
+            "218";
+            while (f["<"](10)) {
+                "219";
+                fHA.plot(0, nHA);
+                "220";
+                fA.plot(0, nA);
+                "221";
+                fHHB.plot(0, nHHB);
+                "222";
+                fB.plot(0, nB);
+                "223";
+                fHAT.plot(0, nHAT["/"](1e-6));
+                "224";
+                fAT.plot(0, nAT["/"](1e-6));
+                "225";
+                f=f["+"](1);
+            }
+        };
+        if (!Reset.__module__) Object.defineProperties(Reset, {
+            __module__ : {value: null}
+        });
+
+        "228";
+        async function move_x(group, x_val) {
+            var ρσ_ls, obj;
+            "229";
+            var ρσ_Iter5 = group;
+            ρσ_Iter5 = ((typeof ρσ_Iter5[Symbol.iterator] === "function") ? (ρσ_Iter5 instanceof Map ? ρσ_Iter5.keys() : ρσ_Iter5) : Object.keys(ρσ_Iter5));
+            for (var ρσ_Index5 of ρσ_Iter5) {
+                obj = ρσ_Index5;
+                "230";
+                obj.pos.x=obj.pos.x["+"](x_val);
+            }
+        };
+        if (!move_x.__argnames__) Object.defineProperties(move_x, {
+            __argnames__ : {value: ["group", "x_val"]},
+            __module__ : {value: null}
+        });
+
+        "231";
+        async function move_y(group, y_val) {
+            var ρσ_ls, obj;
+            "232";
+            var ρσ_Iter6 = group;
+            ρσ_Iter6 = ((typeof ρσ_Iter6[Symbol.iterator] === "function") ? (ρσ_Iter6 instanceof Map ? ρσ_Iter6.keys() : ρσ_Iter6) : Object.keys(ρσ_Iter6));
+            for (var ρσ_Index6 of ρσ_Iter6) {
+                obj = ρσ_Index6;
+                "233";
+                obj.pos.y=obj.pos.y["+"](y_val);
+            }
+        };
+        if (!move_y.__argnames__) Object.defineProperties(move_y, {
+            __argnames__ : {value: ["group", "y_val"]},
+            __module__ : {value: null}
+        });
+
+        "234";
+        async function protonate(group) {
+            "235";
+            "236";
+            if ((ρσ_getitem(group, 0).species === "A" || typeof ρσ_getitem(group, 0).species === "object" && ρσ_equals(ρσ_getitem(group, 0).species, "A"))) {
+                "237";
+                ρσ_getitem(group, 1).visible = true;
+                "238";
+                ρσ_getitem(group, 0).color = HA_clr;
+                "239";
+                nHA=nHA["+"](1);
+                nA=nA["-"](1);
+                "240";
+            } else if ((ρσ_getitem(group, 0).species === "B" || typeof ρσ_getitem(group, 0).species === "object" && ρσ_equals(ρσ_getitem(group, 0).species, "B"))) {
+                "241";
+                if (ρσ_getitem(group, 2).visible) {
+                    "242";
+                    ρσ_getitem(group, 1).visible = true;
+                    "243";
+                    ρσ_getitem(group, 0).color = HHB_clr;
+                    "244";
+                    ρσ_getitem(group, 0).opacity = 1;
+                    "245";
+                    nHHB=nHHB["+"](1);
+                    nHB=nHB["-"](1);
+                    "246";
+                } else {
+                    "247";
+                    ρσ_getitem(group, 2).visible = true;
+                    "248";
+                    ρσ_getitem(group, 0).color = HB_clr;
+                    "249";
+                    ρσ_getitem(group, 0).opacity = .5;
+                    "250";
+                    nHB=nHB["+"](1);
+                    nB=nB["-"](1);
+                }
+            }
+        };
+        if (!protonate.__argnames__) Object.defineProperties(protonate, {
+            __argnames__ : {value: ["group"]},
+            __module__ : {value: null}
+        });
+
+        "252";
+        async function deprotonate(group) {
+            "253";
+            "254";
+            if ((ρσ_getitem(group, 0).species === "A" || typeof ρσ_getitem(group, 0).species === "object" && ρσ_equals(ρσ_getitem(group, 0).species, "A"))) {
+                "255";
+                ρσ_getitem(group, 1).visible = false;
+                "256";
+                ρσ_getitem(group, 0).color = A_clr;
+                "257";
+                nHA=nHA["-"](1);
+                nA=nA["+"](1);
+                "258";
+            } else if ((ρσ_getitem(group, 0).species === "B" || typeof ρσ_getitem(group, 0).species === "object" && ρσ_equals(ρσ_getitem(group, 0).species, "B"))) {
+                "259";
+                if (ρσ_getitem(group, 1).visible) {
+                    "260";
+                    ρσ_getitem(group, 1).visible = false;
+                    "261";
+                    ρσ_getitem(group, 0).color = HB_clr;
+                    "262";
+                    ρσ_getitem(group, 0).opacity = .5;
+                    "263";
+                    nHHB=nHHB["-"](1);
+                    nHB=nHB["+"](1);
+                    "264";
+                } else {
+                    "265";
+                    ρσ_getitem(group, 2).visible = false;
+                    "266";
+                    ρσ_getitem(group, 0).color = B_clr;
+                    "267";
+                    ρσ_getitem(group, 0).opacity = 1;
+                    "268";
+                    nHB=nHB["-"](1);
+                    nB=nB["+"](1);
+                }
+            }
+        };
+        if (!deprotonate.__argnames__) Object.defineProperties(deprotonate, {
+            __argnames__ : {value: ["group"]},
+            __module__ : {value: null}
+        });
+
+        "270";
+        async function hit_list(group, A_search, B_search) {
+            var ρσ_ls, group_curr, group_prev, hit_list, g_curr, g;
+            "274";
+            group_curr = ρσ_getitem(group, 0).pos;
+            "275";
+            group_prev = ρσ_getitem(group, 0).pos["-"](1["*"](ρσ_getitem(group, 0).vel)["*"](dt));
+            "277";
+            hit_list = ρσ_dict();
+            ρσ_setitem(hit_list, "A", ρσ_list_decorate([]));
+            ρσ_setitem(hit_list, "B", ρσ_list_decorate([]));
+            "278";
+            var ρσ_Iter7 = A_search;
+            ρσ_Iter7 = ((typeof ρσ_Iter7[Symbol.iterator] === "function") ? (ρσ_Iter7 instanceof Map ? ρσ_Iter7.keys() : ρσ_Iter7) : Object.keys(ρσ_Iter7));
+            for (var ρσ_Index7 of ρσ_Iter7) {
+                g = ρσ_Index7;
+                "279";
+                if ((g !== group && (typeof g !== "object" || ρσ_not_equals(g, group)))) {
+                    "280";
+                    g_curr = ρσ_getitem(g, 0).pos;
+                    "282";
+                    if (mag(g_curr["-"](1["*"](group_curr)))["<="](ρσ_getitem(g, 0).radius["+"](ρσ_getitem(group, 0).radius)["*"](1.4))) {
+                        "283";
+                        ρσ_getitem(hit_list, "A").append(g);
+                    }
+                }
+            }
+            "285";
+            var ρσ_Iter8 = B_search;
+            ρσ_Iter8 = ((typeof ρσ_Iter8[Symbol.iterator] === "function") ? (ρσ_Iter8 instanceof Map ? ρσ_Iter8.keys() : ρσ_Iter8) : Object.keys(ρσ_Iter8));
+            for (var ρσ_Index8 of ρσ_Iter8) {
+                g = ρσ_Index8;
+                "286";
+                if ((g !== group && (typeof g !== "object" || ρσ_not_equals(g, group)))) {
+                    "287";
+                    g_curr = ρσ_getitem(g, 0).pos;
+                    "289";
+                    if (mag(g_curr["-"](1["*"](group_curr)))["<="](ρσ_getitem(g, 0).radius["+"](ρσ_getitem(group, 0).radius)["*"](1.4))) {
+                        "290";
+                        ρσ_getitem(hit_list, "B").append(g);
+                    }
+                }
+            }
+            "291";
+            return hit_list;
+        };
+        if (!hit_list.__argnames__) Object.defineProperties(hit_list, {
+            __argnames__ : {value: ["group", "A_search", "B_search"]},
+            __module__ : {value: null}
+        });
+
+        "294";
+        async function ellastic_coll() {
+            var g1 = ( 0 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true) ? undefined : arguments[0];
+            var g2 = ( 1 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true) ? undefined : arguments[1];
+            var g1_old = (arguments[2] === undefined || ( 2 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? ellastic_coll.__defaults__.g1_old : arguments[2];
+            var g2_old = (arguments[3] === undefined || ( 3 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? ellastic_coll.__defaults__.g2_old : arguments[3];
+            var ρσ_kwargs_obj = arguments[arguments.length["-"](1)];
+            if (ρσ_kwargs_obj === null || typeof ρσ_kwargs_obj !== "object" || ρσ_kwargs_obj [ρσ_kwargs_symbol] !== true) ρσ_kwargs_obj = {};
+            if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "g1_old")){
+                g1_old = ρσ_kwargs_obj.g1_old;
+            }
+            if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "g2_old")){
+                g2_old = ρσ_kwargs_obj.g2_old;
+            }
+            var ρσ_ls, v1, v2, v1_new, v2_new;
+            "295";
+            if (!g1_old) {
+                "296";
+                v1 = ρσ_getitem(g1, 0).vel;
+                "297";
+            } else {
+                "298";
+                v1 = ρσ_getitem(g1, 0).old_vel;
+                "300";
+            }
+            if (!g2_old) {
+                "301";
+                v2 = ρσ_getitem(g2, 0).vel;
+                "302";
+            } else {
+                "303";
+                v2 = ρσ_getitem(g2, 0).old_vel;
+            }
+            "304";
+            v1_new = v2;
+            "305";
+            v2_new = v1;
+            "306";
+            return [v1_new, v2_new];
+        };
+        if (!ellastic_coll.__defaults__) Object.defineProperties(ellastic_coll, {
+            __defaults__ : {value: {g1_old:false, g2_old:false}},
+            __handles_kwarg_interpolation__ : {value: true},
+            __argnames__ : {value: ["g1", "g2", "g1_old", "g2_old"]},
+            __module__ : {value: null}
+        });
+
+        "308";
+        async function wall_coll(g) {
+            var ρσ_ls, overlap;
+            "309";
+            if (ρσ_getitem(g, 0).pos.x["-"](1["*"](ρσ_getitem(g, 0).radius))["<="](1["-u"]()["*"](side)["/"](2))) {
+                "310";
+                overlap = 1["-u"]()["*"](side)["/"](2)["-"](1["*"](ρσ_getitem(g, 0).pos.x["-"](1["*"](ρσ_getitem(g, 0).radius))));
+                "311";
+                (await move_x(g, overlap));
+                "312";
+                ρσ_getitem(g, 0).vel.x = 1["-u"]()["*"](ρσ_getitem(g, 0).vel.x);
+                "313";
+            } else if (ρσ_getitem(g, 1).pos.x["+"](ρσ_getitem(g, 1).radius)[">="](side["/"](2))) {
+                "314";
+                overlap = side["/"](2)["-"](1["*"](ρσ_getitem(g, 1).pos.x["+"](ρσ_getitem(g, 1).radius)));
+                "315";
+                (await move_x(g, overlap));
+                "316";
+                ρσ_getitem(g, 0).vel.x = 1["-u"]()["*"](ρσ_getitem(g, 0).vel.x);
+                "318";
+            }
+            if (ρσ_getitem(g, 0).pos.y["-"](1["*"](ρσ_getitem(g, 0).radius))["<="](1["-u"]()["*"](side)["/"](2))) {
+                "319";
+                overlap = 1["-u"]()["*"](side)["/"](2)["-"](1["*"](ρσ_getitem(g, 0).pos.y["-"](1["*"](ρσ_getitem(g, 0).radius))));
+                "320";
+                (await move_y(g, overlap));
+                "321";
+                ρσ_getitem(g, 0).vel.y = 1["-u"]()["*"](ρσ_getitem(g, 0).vel.y);
+                "322";
+            } else if (ρσ_getitem(g, 1).pos.y["+"](ρσ_getitem(g, 1).radius)[">="](side["/"](2))) {
+                "323";
+                overlap = side["/"](2)["-"](1["*"](ρσ_getitem(g, 1).pos.y["+"](ρσ_getitem(g, 1).radius)));
+                "324";
+                (await move_y(g, overlap));
+                "325";
+                ρσ_getitem(g, 0).vel.y = 1["-u"]()["*"](ρσ_getitem(g, 0).vel.y);
+            }
+        };
+        if (!wall_coll.__argnames__) Object.defineProperties(wall_coll, {
+            __argnames__ : {value: ["g"]},
+            __module__ : {value: null}
+        });
+
+        "327";
+        async function isSleeping(g) {
+            "332";
+            if ((ρσ_getitem(g, 0).sleepCounter === 0 || typeof ρσ_getitem(g, 0).sleepCounter === "object" && ρσ_equals(ρσ_getitem(g, 0).sleepCounter, 0))) {
+                "333";
+                return false;
+                "334";
+            } else {
+                "335";
+                return true;
+            }
+        };
+        if (!isSleeping.__argnames__) Object.defineProperties(isSleeping, {
+            __argnames__ : {value: ["g"]},
+            __module__ : {value: null}
+        });
+
+        "337";
+        async function Controls(evt) {
+            "338";
+            (await PlayPause());
+        };
+        if (!Controls.__argnames__) Object.defineProperties(Controls, {
+            __argnames__ : {value: ["evt"]},
+            __module__ : {value: null}
+        });
+
+        "340";
+        partscreen.bind("click", Controls);
+        "341";
+        t = 0;
+        "342";
+        t_i = 0;
+        "343";
+        while (true) {
+            "344";
+            (await rate(70));
+            "345";
+            if (!running) {
+                "346";
+                "347";
+            } else if (t["<"](time_limit)) {
+                "348";
+                if (t["*"](real_time)[">"](1)) {
+                    "349";
+                    Cgraph.xmax = t["*"](real_time);
+                }
+                "350";
+                var ρσ_Iter9 = A_list;
+                ρσ_Iter9 = ((typeof ρσ_Iter9[Symbol.iterator] === "function") ? (ρσ_Iter9 instanceof Map ? ρσ_Iter9.keys() : ρσ_Iter9) : Object.keys(ρσ_Iter9));
+                for (var ρσ_Index9 of ρσ_Iter9) {
+                    gA = ρσ_Index9;
+                    "351";
+                    if (ρσ_getitem(gA, 0).sleepCounter[">"](durSleep["-"](1["*"](1)))) {
+                        "352";
+                        ρσ_getitem(gA, 0).sleepCounter = 0;
+                    }
+                    "353";
+                    (await wall_coll(gA));
+                }
+                "354";
+                var ρσ_Iter10 = B_list;
+                ρσ_Iter10 = ((typeof ρσ_Iter10[Symbol.iterator] === "function") ? (ρσ_Iter10 instanceof Map ? ρσ_Iter10.keys() : ρσ_Iter10) : Object.keys(ρσ_Iter10));
+                for (var ρσ_Index10 of ρσ_Iter10) {
+                    gB = ρσ_Index10;
+                    "355";
+                    if (ρσ_getitem(gB, 0).sleepCounter[">"](durSleep["-"](1["*"](1)))) {
+                        "356";
+                        ρσ_getitem(gB, 0).sleepCounter = 0;
+                    }
+                    "357";
+                    (await wall_coll(gB));
+                }
+                "358";
+                for (var ρσ_Index11 = 0; ρσ_Index11["<"](A_tot); ρσ_Index11++) {
+                    i = ρσ_Index11;
+                    "359";
+                    g1 = ρσ_getitem(A_list, i);
+                    "360";
+                    if (ρσ_equals(t_i["%"](t_rand), 0)) {
+                        "361";
+                        beta = 1["-u"]()["*"](pi)["/"](4)["+"](random()["*"](pi)["/"](2));
+                        "362";
+                        x1 = ρσ_getitem(g1, 0).vel.x;
+                        "363";
+                        y1 = ρσ_getitem(g1, 0).vel.y;
+                        "364";
+                        ρσ_getitem(g1, 0).vel.x = cos(beta)["*"](x1)["-"](1["*"](sin(beta))["*"](y1));
+                        "365";
+                        ρσ_getitem(g1, 0).vel.y = sin(beta)["*"](x1)["+"](cos(beta)["*"](y1));
+                    }
+                    "366";
+                    hitlist = (await hit_list(g1, A_list, B_list));
+                    "367";
+                    var ρσ_Iter12 = ρσ_getitem(hitlist, "A").slice(i);
+                    ρσ_Iter12 = ((typeof ρσ_Iter12[Symbol.iterator] === "function") ? (ρσ_Iter12 instanceof Map ? ρσ_Iter12.keys() : ρσ_Iter12) : Object.keys(ρσ_Iter12));
+                    for (var ρσ_Index12 of ρσ_Iter12) {
+                        g2 = ρσ_Index12;
+                        "368";
+                        if (false) {
+                            "369";
+                            c1 = ρσ_getitem(g1, 0).pos;
+                            "370";
+                            c2 = ρσ_getitem(g2, 0).pos;
+                            "371";
+                            v1 = ρσ_getitem(g1, 0).vel;
+                            "372";
+                            v2 = ρσ_getitem(g2, 0).vel;
+                            "373";
+                            vtot = v1["+"](v2);
+                            "374";
+                            vrel = v2["-"](1["*"](v1));
+                            "375";
+                            a = vrel.mag2;
+                            "376";
+                            if ((a === 0 || typeof a === "object" && ρσ_equals(a, 0))) {
+                                "377";
+                                continue;
+                            }
+                            "378";
+                            rrel = c1["-"](1["*"](c2));
+                            "379";
+                            if (rrel.mag[">"](ρσ_getitem(g1, 0).radius)) {
+                                "380";
+                                continue;
+                            }
+                            "381";
+                            dx = dot(rrel, vrel.hat);
+                            "382";
+                            dy = cross(rrel, vrel.hat).mag;
+                            "383";
+                            alpha = asin(dy["/"](ρσ_getitem(g1, 0).radius["+"](ρσ_getitem(g2, 0).radius)));
+                            "384";
+                            d_in = ρσ_getitem(g1, 0).radius["+"](ρσ_getitem(g2, 0).radius)["*"](cos(alpha))["-"](1["*"](dx));
+                            "385";
+                            deltat = d_in["/"](vrel.mag);
+                            "387";
+                            (await move_x(g1, 1["-u"]()["*"](v1.x)["*"](deltat)));
+                            "388";
+                            (await move_y(g1, 1["-u"]()["*"](v1.y)["*"](deltat)));
+                            "389";
+                            (await move_x(g2, 1["-u"]()["*"](v2.x)["*"](deltat)));
+                            "390";
+                            (await move_y(g2, 1["-u"]()["*"](v2.y)["*"](deltat)));
+                            "392";
+                            pcm1 = v1["-"](1["*"](vtot)["/"](2));
+                            "393";
+                            pcm2 = v2["-"](1["*"](vtot)["/"](2));
+                            "394";
+                            rrel = norm(rrel);
+                            "395";
+                            pcm1=pcm1["-"](2["*"](pcm1.dot(rrel))["*"](rrel));
+                            "396";
+                            pcm2=pcm2["-"](2["*"](pcm2.dot(rrel))["*"](rrel));
+                            "397";
+                            ρσ_getitem(g1, 0).vel = pcm1["+"](vtot["*"](1)["/"](2));
+                            "398";
+                            ρσ_getitem(g2, 0).vel = pcm2["+"](vtot["*"](1)["/"](2));
+                            "399";
+                            (await move_x(g1, v1.x["*"](deltat)));
+                            "400";
+                            (await move_y(g1, v1.y["*"](deltat)));
+                            "401";
+                            (await move_x(g2, v2.x["*"](deltat)));
+                            "402";
+                            (await move_y(g2, v2.y["*"](deltat)));
+                        }
+                    }
+                    "403";
+                    var ρσ_Iter13 = ρσ_getitem(hitlist, "B");
+                    ρσ_Iter13 = ((typeof ρσ_Iter13[Symbol.iterator] === "function") ? (ρσ_Iter13 instanceof Map ? ρσ_Iter13.keys() : ρσ_Iter13) : Object.keys(ρσ_Iter13));
+                    for (var ρσ_Index13 of ρσ_Iter13) {
+                        g2 = ρσ_Index13;
+                        "404";
+                        if ((await isSleeping(g1)) || (await isSleeping(g2))) {
+                            "405";
+                            "406";
+                        } else {
+                            "408";
+                            if (ρσ_getitem(g1, 1).visible && !ρσ_getitem(g2, 1).visible) {
+                                "409";
+                                if (random()["<"](p_HA_A)) {
+                                    "410";
+                                    (await deprotonate(g1));
+                                    "411";
+                                    (await protonate(g2));
+                                    "412";
+                                    ρσ_getitem(g1, 0).sleepCounter = 1;
+                                    "413";
+                                    ρσ_getitem(g2, 0).sleepCounter = 1;
+                                    "415";
+                                }
+                            } else if (!ρσ_getitem(g1, 1).visible && ρσ_getitem(g2, 1).visible) {
+                                "416";
+                                if (random()["<"](p_A_HA)) {
+                                    "417";
+                                    (await deprotonate(g2));
+                                    "418";
+                                    (await protonate(g1));
+                                    "419";
+                                    ρσ_getitem(g1, 0).sleepCounter = 1;
+                                    "420";
+                                    ρσ_getitem(g2, 0).sleepCounter = 1;
+                                    "422";
+                                }
+                            } else if (!ρσ_getitem(g1, 1).visible && !ρσ_getitem(g2, 1).visible && ρσ_getitem(g2, 2).visible) {
+                                "423";
+                                if (random()["<"](p_Ab_HA)) {
+                                    "424";
+                                    (await deprotonate(g2));
+                                    "425";
+                                    (await protonate(g1));
+                                    "426";
+                                    ρσ_getitem(g1, 0).sleepCounter = 1;
+                                    "427";
+                                    ρσ_getitem(g2, 0).sleepCounter = 1;
+                                    "429";
+                                }
+                            } else if (ρσ_getitem(g1, 1).visible && !ρσ_getitem(g2, 2).visible) {
+                                "430";
+                                if (random()["<"](p_HA_Ab)) {
+                                    "431";
+                                    (await deprotonate(g1));
+                                    "432";
+                                    (await protonate(g2));
+                                    "433";
+                                    ρσ_getitem(g1, 0).sleepCounter = 1;
+                                    "434";
+                                    ρσ_getitem(g2, 0).sleepCounter = 1;
+                                }
+                            }
+                        }
+                    }
+                }
+                "436";
+                for (var ρσ_Index14 = 0; ρσ_Index14["<"](B_tot); ρσ_Index14++) {
+                    i = ρσ_Index14;
+                    "437";
+                    g1 = ρσ_getitem(B_list, i);
+                    "438";
+                    if (ρσ_equals(t_i["%"](t_rand), 0)) {
+                        "439";
+                        beta = 1["-u"]()["*"](pi)["/"](4)["+"](random()["*"](pi)["/"](2));
+                        "440";
+                        x1 = ρσ_getitem(g1, 0).vel.x;
+                        "441";
+                        y1 = ρσ_getitem(g1, 0).vel.y;
+                        "442";
+                        ρσ_getitem(g1, 0).vel.x = cos(beta)["*"](x1)["-"](1["*"](sin(beta))["*"](y1));
+                        "443";
+                        ρσ_getitem(g1, 0).vel.y = sin(beta)["*"](x1)["+"](cos(beta)["*"](y1));
+                        "444";
+                        hitlist = (await hit_list(g1, A_list, B_list));
+                        "445";
+                        var ρσ_Iter15 = ρσ_getitem(hitlist, "B");
+                        ρσ_Iter15 = ((typeof ρσ_Iter15[Symbol.iterator] === "function") ? (ρσ_Iter15 instanceof Map ? ρσ_Iter15.keys() : ρσ_Iter15) : Object.keys(ρσ_Iter15));
+                        for (var ρσ_Index15 of ρσ_Iter15) {
+                            g2 = ρσ_Index15;
+                            "446";
+                            if (ρσ_getitem(g1, 1).visible && !ρσ_getitem(g2, 2).visible) {
+                                "447";
+                                (await deprotonate(g1));
+                                "448";
+                                (await protonate(g2));
+                            }
+                        }
+                    }
+                }
+                "449";
+                var ρσ_Iter16 = A_list;
+                ρσ_Iter16 = ((typeof ρσ_Iter16[Symbol.iterator] === "function") ? (ρσ_Iter16 instanceof Map ? ρσ_Iter16.keys() : ρσ_Iter16) : Object.keys(ρσ_Iter16));
+                for (var ρσ_Index16 of ρσ_Iter16) {
+                    gA = ρσ_Index16;
+                    "450";
+                    (await move_x(gA, ρσ_getitem(gA, 0).vel.x["*"](dt)));
+                    "451";
+                    (await move_y(gA, ρσ_getitem(gA, 0).vel.y["*"](dt)));
+                    "452";
+                    if (ρσ_getitem(gA, 0).sleepCounter[">"](0)) {
+                        "453";
+                        ρσ_getitem(gA, 0).sleepCounter=ρσ_getitem(gA, 0).sleepCounter["+"](1);
+                    }
+                }
+                "454";
+                var ρσ_Iter17 = B_list;
+                ρσ_Iter17 = ((typeof ρσ_Iter17[Symbol.iterator] === "function") ? (ρσ_Iter17 instanceof Map ? ρσ_Iter17.keys() : ρσ_Iter17) : Object.keys(ρσ_Iter17));
+                for (var ρσ_Index17 of ρσ_Iter17) {
+                    gB = ρσ_Index17;
+                    "455";
+                    (await move_x(gB, ρσ_getitem(gB, 0).vel.x["*"](dt)));
+                    "456";
+                    (await move_y(gB, ρσ_getitem(gB, 0).vel.y["*"](dt)));
+                    "457";
+                    if (ρσ_getitem(gB, 0).sleepCounter[">"](0)) {
+                        "458";
+                        ρσ_getitem(gB, 0).sleepCounter=ρσ_getitem(gB, 0).sleepCounter["+"](1);
+                    }
+                    "460";
+                    center = ρσ_getitem(gB, 0).pos;
+                    "461";
+                    var ρσ_Iter18 = gB.slice(1);
+                    ρσ_Iter18 = ((typeof ρσ_Iter18[Symbol.iterator] === "function") ? (ρσ_Iter18 instanceof Map ? ρσ_Iter18.keys() : ρσ_Iter18) : Object.keys(ρσ_Iter18));
+                    for (var ρσ_Index18 of ρσ_Iter18) {
+                        H = ρσ_Index18;
+                        "462";
+                        newtheta = H.theta["+"](.05["*"](ρσ_getitem(gB, 0).turndir));
+                        "463";
+                        H.theta = newtheta;
+                        "464";
+                        H.pos = center["+"](B_rad["*"](.8)["*"](vec(cos(newtheta), sin(newtheta), 0)));
+                    }
+                }
+                "465";
+                fHA.plot(t["*"](real_time), nHA);
+                "466";
+                fA.plot(t["*"](real_time), nA);
+                "467";
+                fHHB.plot(t["*"](real_time), nHHB);
+                "468";
+                fB.plot(t["*"](real_time), nB);
+                "470";
+                k_A_HA = f_A_HA;
+                "471";
+                k_HA_A = K_A["*"](k_A_HA);
+                "472";
+                nHHBT = A_tot["*"](1e-6)["-"](1["*"](nHAT))["-"](1["*"](A_tot["-"](1["*"](nHAi)))["*"](1e-6));
+                "473";
+                nHAT = nHAT["+"](1["-u"]()["*"](k_HA_A)["*"](nHAT)["+"](k_A_HA["*"](nAT)["*"](nHHBT))["*"](dt)["*"](real_time)["/"](1e3));
+                "474";
+                nAT = A_tot["*"](1e-6)["-"](1["*"](nHAT));
+                "475";
+                fHAT.plot(t["*"](real_time), nHAT["/"](1e-6));
+                "476";
+                fAT.plot(t["*"](real_time), nAT["/"](1e-6));
+                "477";
+                t=t["+"](dt);
+                "478";
+                t_i=t_i["+"](1);
+                "479";
+            }
+            if (t[">="](time_limit) && t["<"](time_limit["+"](dt))) {
+                "480";
+                running = false;
+                "481";
+                pauseBgnd.visible = true;
+                "482";
+                replayText.visible = true;
+            }
+        }
+    };
+    if (!__main__.__module__) Object.defineProperties(__main__, {
+        __module__ : {value: null}
+    });
+
+    
+    
+    ;$(function(){ window.__context = { glowscript_container: $("#glowscript")}; __main__() })})()
+    // END JAVASCRIPT
+            //--><!]]>
+    var legend = document.getElementsByClassName("legend")
+    
+    // console.log(legend)
+    // legend.style = "position: absolute; width: 102px; height: 173px; top: 33px; right: 9px; background-color: rgb(255, 0, 0); opacity: 0.85;"
+    </script>
+            </div>
+        
+    </body>
+

@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<!--
+	Made using the template Phantom by HTML5 UP
+	html5up.net | @ajlkn
+-->
+<html>
+<head>
+    <title>Atombau und Spektroskopie</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+    </head>
+<body class="is-preload">
+<!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <div class="inner">
+                <span class="title">AAC-Simulationen</span>
+                <!-- Logo -->
+                <span class="logo" >
+                    <a href="/index.html">
+                        <span class="symbol"><img src="/images/huberlin-logo.svg" alt=""/></span>
+                    </a>
+                </span> 
+            </div>
+			<!-- Nav -->
+			<nav>
+                <span class="helpButton">
+                    <a href="#menu">
+                        <img src="/images/info-circle.svg" alt="Hilfe" />
+                    </a>
+                </span>
+            </nav>
+        </header>
+
+        <!-- Menu (help in disguise)-->
+        <nav id="menu">
+            <div class="inner">
+				<div class="inner" id="helpHints">
+					<h2>Hilfreiche Informationen</h2>
+					<h3>Konstanten:</h3>
+					<li>Planck'sches Wirkungsquantum: <em>h</em> = 6.626 &middot; 10<sup>-34</sup> J&middot;s</sup></li>
+					<li>Lichtgeschwindigkeit: <em>c</em> = 2.998 &middot; 10<sup>8</sup> m&middot;s<sup>-1</sup></li>
+					<h3>Einheiten:</h3>
+					<li>1 eV = 1.602 &middot; 10<sup>-19</sup> J</li>
+					<li>1 Hz = 1 s<sup>-1</sup></li>
+					<h3>Elektromagnetisches Spektrum</h3>
+					<img src="/images/EM-Spektrum.svg" width="100%">
+					<p style="font-size:0.8em">Bildnachweis: Matt, CC BY-SA 2.5, via Wikimedia Commons | <a href = "https://commons.wikimedia.org/wiki/File:EM-Spektrum.svg" target="_blank">(Originalbild anschauen)</a></p>
+				</div>
+			</div>
+        </nav>
+
+        <!-- Main -->
+        <div id="main">
+            <div class="inner">
+                <h1>Atombau und Spektroskopie</h1>
+				<h2>Simulation C: Visualisierung von Quantenzahlen </h2>
+                <p style="margin-bottom:1em">In dieser Simulation werden die Orbitale vom wasserstoffähnlichen Atomen visualisiert. Wähle eine Kombination von den quantenzahlen <em>n</em>, <em>l</em> und <em>m<sub>l</sub></em>, um das entsprechende Orbital anzuschauen.</p>
+                <iframe scrolling="no" id="simulationC" src="/assets/qmatom/qmatom.html" 
+                        style="width: 90%; aspect-ratio: 1.3"></iframe>
+                <p style="font-size:1em; color:rgb(26, 14, 255); margin-bottom:0; margin-left:0.5em">
+                    &copy Simulation von Paul Falstad <a href="http://www.falstad.com/mathphysics.html" target="_blank">(java@falstad.com)</a>, leicht verändert und übersetzt.
+                </p> 
+            </div>
+        </div>
+        
+        <!-- Simnav buttons -->
+        <div id="simnav">
+            <div class="inner">
+                <section class="tiles">
+                    <article class="stylePDF">
+                        <span class="image">
+                            <img src="/images/pic01.jpg" alt="" />
+                        </span>
+                        <a href="#">
+                            <h2>PDF</h2>
+                            <div class="content">
+                                <p>Aufgaben dieser Aktivität</p>
+                            </div>
+                        </a>
+                    </article>
+					<article class="styleSim">
+                        <span class="image">
+                            <img src="/images/pic02.jpg" alt="" />
+                        </span>
+                        <a href="animA.html">
+                            <h2>Animation A</h2>
+                            <div class="content">
+                                <p>Prinzip der PES</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="styleSim">
+                        <span class="image">
+                            <img src="/images/pic02.jpg" alt="" />
+                        </span>
+                        <a href="simA.html">
+                            <h2>Simulation A</h2>
+                            <div class="content">
+                                <p>Identifizierung von PES-Spektren</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="styleSim">
+                        <span class="image">
+                            <img src="/images/pic02.jpg" alt="" />
+                        </span>
+                        <a href="simB.html">
+                            <h2>Simulation B</h2>
+                            <div class="content">
+                                <p>Spektrum von Wasserstoff</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="styleSim">
+                        <span class="image">
+                            <img src="/images/pic02.jpg" alt="" />
+                        </span>
+                        <a href="simC.html">
+                            <h2>Simulation C</h2>
+                            <div class="content">
+                                <p>Visualisierung von Quantenzahlen</p>
+                            </div>
+                        </a>
+                    </article>
+                </section>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <div class="inner">
+                <p>&copy; Tiemann Lab @ HU-Berlin | Design:&nbsp <a href="http://html5up.net">HTML5 UP</a></p>
+            </div>
+        </footer>
+    </div>
+
+<!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/Three49custom.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+</body>
+</html>

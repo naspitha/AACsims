@@ -474,6 +474,15 @@ section, summary, time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;}
 
+canvas {
+	margin: 0 0.5em 0 0
+}
+
+.glowscript-graph {
+	margin: 0 0 0 0.5em;
+	overflow: hidden
+}
+
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;}
@@ -496,7 +505,6 @@ blockquote, q {
 	}
 
 table {
-	border-collapse: collapse;
 	border-spacing: 0;
 }
 
@@ -2591,7 +2599,7 @@ input, select, textarea {
 		display: block;
 		font-size: 0.9em;
 		font-weight: 900;
-		margin: 0 0 1em 0;
+		margin: 0;
 	}
 
 	input[type="text"],
@@ -2683,55 +2691,61 @@ input, select, textarea {
 		z-index: -1;
 	}
 
-		input[type="checkbox"] + label,
-		input[type="radio"] + label {
-			text-decoration: none;
-			color: #585858;
-			cursor: pointer;
+	input[type="checkbox"] + label,
+	input[type="radio"] + label {
+		text-decoration: none;
+		color: #585858;
+		cursor: pointer;
+		display: inline-block;
+		font-size: 1em;
+		font-weight: 300;
+		padding-left: 0.7em;
+		padding-right: 1em;
+		position: relative;
+	}
+
+	input[type="checkbox"] + label + span,
+	input[type="radio"] + label + span {
+		margin-right: 1em
+	}
+
+		input[type="checkbox"] + label:before,
+		input[type="radio"] + label:before {
+			-moz-osx-font-smoothing: grayscale;
+			-webkit-font-smoothing: antialiased;
 			display: inline-block;
-			font-size: 1em;
-			font-weight: 300;
-			padding-left: 2.55em;
-			padding-right: 0.75em;
-			position: relative;
+			font-style: normal;
+			font-variant: normal;
+			text-rendering: auto;
+			margin-left: 0.5em;
+			line-height: 1;
+			text-transform: none !important;
+			font-family: 'Font Awesome 5 Free';
+			font-weight: 900;
 		}
 
-			input[type="checkbox"] + label:before,
-			input[type="radio"] + label:before {
-				-moz-osx-font-smoothing: grayscale;
-				-webkit-font-smoothing: antialiased;
-				display: inline-block;
-				font-style: normal;
-				font-variant: normal;
-				text-rendering: auto;
-				line-height: 1;
-				text-transform: none !important;
-				font-family: 'Font Awesome 5 Free';
-				font-weight: 900;
-			}
-
-			input[type="checkbox"] + label:before,
-			input[type="radio"] + label:before {
-				border-radius: 4px;
-				border: solid 1px #c9c9c9;
-				content: '';
-				display: inline-block;
-				font-size: 0.8em;
-				height: 2.25em;
-				left: 0;
-				line-height: 2.25em;
-				position: absolute;
-				text-align: center;
-				top: 0;
-				width: 2.25em;
-			}
+		input[type="checkbox"] + label:before,
+		input[type="radio"] + label:before {
+			border-radius: 4px;
+			border: solid 1px #5b5252;
+			content: '';
+			display: inline-block;
+			font-size: 0.8em;
+			height: 1.5em;
+			left: 0;
+			line-height: 1.5em;
+			position: absolute;
+			text-align: center;
+			top: 0;
+			width: 1.5em;
+		}
 
 		input[type="checkbox"]:checked + label:before,
 		input[type="radio"]:checked + label:before {
-			background: #585858;
+			background: #ffffff;
 			border-color: #585858;
-			color: #ffffff;
-			content: '\f00c';
+			color: #000000;
+			content: '\2714';
 		}
 
 		input[type="checkbox"]:focus + label:before,
@@ -2839,22 +2853,13 @@ input, select, textarea {
 	}
 
 	table {
-		margin: 0 0 2em 0;
-		width: 100%;
+		margin: 0;
 	}
 
-		table tbody tr {
-			border: solid 1px #c9c9c9;
-			border-left: 0;
-			border-right: 0;
-		}
 
-			table tbody tr:nth-child(2n + 1) {
-				background-color: rgba(144, 144, 144, 0.075);
-			}
 
 		table td {
-			padding: 0.75em 0.75em;
+			padding: 0;
 		}
 
 		table th {

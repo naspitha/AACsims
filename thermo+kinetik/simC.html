@@ -1,0 +1,206 @@
+<!DOCTYPE HTML>
+<!--
+	Made using the template Phantom by HTML5 UP
+	html5up.net | @ajlkn
+-->
+<html>
+<head>
+    <title>Thermodynamik und Kinetik</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+    </head>
+<body class="is-preload">
+<!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <div class="inner">
+                <span class="title">AAC-Simulationen</span>
+                <!-- Logo -->
+                <span class="logo" >
+                    <a href="/index.html">
+                        <span class="symbol"><img src="/images/huberlin-logo.svg" alt="HU-Berlin" /></span>
+                    </a>
+                </span>
+                <!-- Nav -->
+                <nav>
+                <span class="helpButton">
+                    <a href="#menu">
+                        <img src="/images/info-circle.svg" alt="Hilfe" />
+                    </a>
+                </span>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Menu (help in disguise)-->
+        <nav id="menu">
+            <div class="inner">
+                <h2>Hilfreiche Informationen</h2>
+                <h3>Konstanten:</h3>
+                <ul>
+                    <li>Verdampfungsenthalpie von Wasser: 
+                    ΔH<sub>vap</sub> = 43,9 kJ mol<sup>-1</sup></li>
+                    <li>Sublimationsenthalpie von Kohlenstoff: 
+                    ΔH<sub>sub</sub> = 717 kJ mol<sup>-1</sup></li>
+                    <li>Gaskonstante: R = 8,314 J mol<sup>-1</sup> K<sup>-1</sup></li>
+                    <li>Coulomb-Konstante: <em>k</em> = 8,99&middot;10<sup>9</sup> N m<sup>2</sup> C<sup>-2</sup> </li>
+                </ul>
+                
+                <h3>Gleichungen:</h3>
+                <ul>
+                    <li>Coulombsches Gesetz: F = <em>k</em> (q<sub>1</sub>q<sub>2</sub>)/r<sup>2</sup></li>
+                    <li>Gibbs-Energie: ΔG<sup>o</sup> = ΔH<sup>o</sup> - T &middot;ΔS<sup>o</sup>=-RT&middot;ln(K<sub>eq</sub>)</li>
+                    <li>Arrhenius-Gleichung: <em>k</em> = A &middot; e<sup> - E<sub>a</sub>/RT</sup></li>
+                    <li>Kinetische Energie und Geschwindigkeit: E<sub>K</sub>= ½ &middot;mv<sup>2</sup></li>
+                </ul>  
+                </div>
+        </nav>
+
+        <!-- Main -->
+        <div id="main">
+            <div class="inner" >
+                <h1>Energieänderungen, Geschwindigkeiten und Gleichgewichte von Reaktionen</h1>
+                <h2>Simulation C: Teilchen und Reaktionsgeschwindigkeit</h2>
+                <p>Die Kollisionstheorie besagt, dass die Geschwindigkeit einer Reaktion proportional zu der Häufigkeit ist, dass die reagierenden Teilchen erfolgreich zusammenstoßen. Eine Voraussetzung einer "erfolgreichen" Kollision ist, dass die Teilchen beim Zusammenstoß eine ausreichend hohe kinetische Energie haben. Die kinetische Energie ist ihrerseits proportional zum Quadrat der Geschwindigkeit eines Teilchens (siehe <em>Hilfreiche Informationen</em>).</p>
+                <h3>Überblick der Simulation:</h3>
+                <ul>
+                    <li>Diese Simulation zeigt eine Menge von Teilchen, die sich innerhalb eines Kastens bewegen.</li>
+                    <li>Das begleitende Diagramm zeigt die Geschwindigkeitsverteilung der Teilchen, d.h. die Anzahl von Teilchen, die jede bestimmte Geschwindigkeit besitzen. </li>
+                    <li>
+                        Die Teilchen sind gemäß ihren Geschwindigkeit gefärbt, wobei Teilchen mit höherer Geschwindigkeit röter sind und Teilchen mit niedrigerer Geschwindigkeit blauer sind. 
+                    </li>
+                    <li>
+                        Teilchen, deren Geschwindigkeit höher als die im Diagram definierte "Grenzgeschwindigkeit" ist, sind gelb gefärbt.
+                    </li>
+                    <li>
+                        Sowohl die Temperatur als auch  die Aktivierungsenergie der Reaktion lassen sich mit dem Schieberegler einstellen. 
+                    </li> 
+                </ul>
+                <iframe scrolling="no" id="simulationC" src="/assets/glowscript/particleKinetics.html" 
+                                style="width: 90%; height: 50px"></iframe>
+                <h3>Beachte:</h3>
+                <ul>
+                    <li>
+                        Damit ein Zusammenstoß zu einer chemischen Reaktion zwischen Molekülen führen kann, müssen die Moleküle auch eine geeignete Ausrichtung zueinander haben. Dieser Punkt wird offensichtich in der Simulation nicht repräsentiert.  
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Simnav buttons -->
+        <div id="simnav">
+            <div class="inner">
+                <section class="tiles">
+                    <article class="stylePDF">
+                        <span class="image">
+                            <img src="/images/pic01.jpg" alt="" />
+                        </span>
+                        <a href="#">
+                            <h2>PDF</h2>
+                            <div class="content">
+                                <p>Aufgaben dieser Aktivität</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="styleSim">
+                        <span class="image">
+                            <img src="/images/pic02.jpg" alt="" />
+                        </span>
+                        <a href="simA.html">
+                            <h2>Simulation A</h2>
+                            <div class="content">
+                                <p>Das Bindungspotential</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="styleSim">
+                        <span class="image">
+                            <img src="/images/pic02.jpg" alt="" />
+                        </span>
+                        <a href="simB.html">
+                            <h2>Simulation B</h2>
+                            <div class="content">
+                                <p>Hess'sches Gesetz</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="styleSimActive">
+                        <span class="image">
+                            <img src="/images/pic02.jpg" alt="" />
+                        </span>
+                        <a href="simC.html">
+                            <h2>Simulation C</h2>
+                            <div class="content">
+                                <p>Teilchen und Reaktionsgeschwindigkeit</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="styleSim">
+                        <span class="image">
+                            <img src="/images/pic02.jpg" alt="" />
+                        </span>
+                        <a href="simD.html">
+                            <h2>Simulation D</h2>
+                            <div class="content">
+                                <p>Chemisches Gleichgewicht</p>
+                            </div>
+                        </a>
+                    </article>
+                </section>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <div class="inner">
+                <p>&copy; Tiemann Lab @ HU-Berlin | Design:&nbsp <a href="http://html5up.net">HTML5 UP</a></p>
+            </div>
+        </footer>
+    </div>
+
+<!-- Scripts -->
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/browser.min.js"></script>
+<script src="/assets/js/breakpoints.min.js"></script>
+<script src="/assets/js/util.js"></script>
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/Three49custom.js"></script>
+<script src="https://d3js.org/d3.v4.js"></script>
+<script>
+    var divC = document.getElementById("simC-cont")
+    var iframeC = document.getElementById('simulationC')
+    iframeC.onload = function(){            
+        graphC = iframeC.contentWindow.document.getElementsByClassName('glowscript-canvas-wrapper ui-resizable')[0]
+        graphC.style.padding = "0em 3em"
+        sliders = iframeC.contentWindow.document.getElementsByClassName('ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all')
+        for (let i = 0; i < sliders.length; i++) {
+                sliders[i].style.height="0.5em";
+                sliders[i].style.width="5em";
+                sliders[i].parentNode.style.lineHeight = "1" 
+                        }
+        handles = iframeC.contentWindow.document.getElementsByClassName('ui-slider-handle ui-state-default ui-corner-all')
+        for (let i = 0; i < handles.length; i++) {
+                handles[i].style.height="0.8em";
+                handles[i].style.width="0.8em"
+                handles[i].style.top="-0.15em"
+                sliders[i].style.padding = "0"    
+                }
+        // sliders[0].style.height = "0.7em"; sliders[0].style.width = "5em"
+        // sliders.forEach( function(element){element.style.width="2em"})
+        t_temp = iframeC.contentWindow.document.getElementById('1')
+        t_temp.style.fontSize = "0.8em"
+        t_ea = iframeC.contentWindow.document.getElementById('2')
+        t_ea.style.fontSize = "0.8em"
+        t_vel = iframeC.contentWindow.document.getElementById('3')
+        t_vel.style.fontSize = "0.8em"
+        t_vel.style.float = "right"
+        iframeC.style.height = iframeC.contentWindow.document.body.scrollHeight+'px'
+        divC.style.display = "none"
+    }
+</script>
+</body>
+</html>

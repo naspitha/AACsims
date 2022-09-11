@@ -1,4 +1,3 @@
-// all variables renamed with a "q" in front.
 var svg = d3.select("#simulationB-svg"),
 margin = 80,
 topmargin = 20
@@ -8,13 +7,12 @@ height = svg.attr("height");
 var playButton = d3.select("#play-button"),
 inputHA = document.getElementById("cHA-value"),
 inputA = document.getElementById("cA-value"),
-addBaseButton = d3.select("#addBase-button"),
 logScaleButton = d3.select("#logScaleCB")
 
 var simRate=10
 var time_unit = 1e-3
 var timepoints = 500
-var conc_unit = 1
+var conc_unit = 1e-3
 var HAi = +(inputHA.value)*conc_unit, Ai=+(inputA.value)*conc_unit
 var H3Oi = 1e-7, OHi = 1e-7
 var F = HAi + Ai
@@ -28,7 +26,7 @@ var kF = 0.5, kR = kF/Ka
 // var kFb = kF*Kb/Ka, kRb = kFb/Kb
 var kFb = 0, kRb = 0
 var xy = [{"t":tOld, "cHA":HAOld, "cA": AOld, "cH3O":H3OOld, "cOH":OHOld}]
-var addedBaseAmt = 5e-3 // in moles/L
+var addedBaseAmt = 0 // in moles/L
 var baseAdded=false
 var addingBaseNow=false
 var logScaleOn = true
@@ -111,7 +109,7 @@ svg.append("text")
     .attr("y", (height-margin)/2)
     .attr("transform", "rotate(-90,"+margin/2+","+(height-margin)/2+")")
     .attr("text-anchor", "middle")
-    .text("Konzentration (mol/L)")
+    .text("Konzentration (mmol/L)")
 
 // pH axis label:
 svg.append("text")
@@ -317,8 +315,7 @@ function drawPoint() {
         inputHA.disabled=false
         inputA.disabled=false
         playButton.text("Restart")
-        document.getElementById("addBase-block").style.display = "inline-block"
-        document.getElementById("addBase-button").disabled=false
+
     } else {
         if (tNew >= (3*timepoints-1)*dt && baseAdded){
             running = false
@@ -390,8 +387,7 @@ playButton.on("click", function(){
             if (playButton.text()=="Restart"){
                 toggleCursor()
             }
-            document.getElementById("addBase-block").style.display = "none"
-            document.getElementById("addBase-button").disabled=true
+
             setTimeout(function(){
                 Reset()
                 running = true
@@ -410,20 +406,6 @@ playButton.on("click", function(){
         }
         
     }
-})
-
-addBaseButton.on("click", function(){
-    document.getElementById("addBase-block").style.display = "none"
-    document.getElementById("addBase-button").disabled=true
-    baseAdded=true    
-    playButton.text("Pause")
-    addingBaseNow=true
-    drawPoint()
-    addingBaseNow=false
-    timer = setInterval(drawPoint, simRate)
-    toggleCursor()
-    inputHA.disabled=true
-    inputA.disabled=true
 })
 
 logScaleButton.on("click", function(){

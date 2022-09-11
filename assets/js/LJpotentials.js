@@ -3,7 +3,6 @@
 //TODO: zoom
 //TODO:  set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 40, left: 50}
-
 var width = 520 - margin.left - margin.right
 var height = 400 - margin.top - margin.bottom;
 
@@ -124,7 +123,7 @@ svg.append("text")
     //.attr("visibility", "hidden")
 
 //Read the data
-d3.csv("./files/plotLJ1.csv", function(data) {
+d3.csv("/files/plotLJ1.csv", function(data) {
     // Color scale
     var keys = ["H2", "F2"]
     var color = d3.scaleOrdinal()
@@ -188,6 +187,7 @@ svg.selectAll("mydots")
             } else {
                 d3.select(lineID).style("visibility", "visible")
                 d3.select(dotID).style("fill", color(d))
+                d3.select("#coord").raise()
             }
         })
 
