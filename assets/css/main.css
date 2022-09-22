@@ -2598,7 +2598,7 @@ input[type="checkbox"] + label:before {
 			position: relative;			
 			height: 10em;
 			width: calc(33.33333% - 2.5em);
-			padding: 0.2em 0.2em;
+			padding: 0.6em 0.6em;
 		}
 
 		.tiles article.stylePDF, article.stylePDFActive {
@@ -2928,10 +2928,19 @@ input[type="checkbox"] + label:before {
 			border-bottom: 0;
 			color: rgb(0, 55, 108); /* HU-Berlin blue */
 			font-weight: 700;
-			font-size: 1.5em;
+			font-size: 1em;
 			letter-spacing: 0em;
 			text-decoration: none;
 			float: left;
+		}
+
+		#header .inner .title a {
+			border-bottom: none;
+		}
+
+		#header .inner .title img {
+			display: block;
+			height: 8em;
 		}
 
 		#header .logo {
@@ -3053,6 +3062,12 @@ input[type="checkbox"] + label:before {
 						}
 		
 						
+		.tabcontent {
+					display: none;
+					padding: 6px 12px;
+					border: 1px solid #ccc;
+					border-top: none;
+				}
 
 		@media screen and (max-width: 736px) {
 
@@ -3070,13 +3085,16 @@ input[type="checkbox"] + label:before {
 					}
 
 		}
-		.tabcontent {
-			display: none;
-			padding: 6px 12px;
-			border: 1px solid #ccc;
-			border-top: none;
-		  }
-		  
+		
+		@media screen and (max-width: 480px) {
+			#header .inner .title {
+				font-size: 0.75em;
+			}
+			#header .logo{
+				font-size: 0.75em;
+				line-height: 1;
+			}
+		}
 
 /* Menu */
 	.helpButton img {
