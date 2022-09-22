@@ -2586,7 +2586,7 @@ input[type="checkbox"] + label:before {
 		-ms-flex-wrap: wrap;
 		flex-wrap: wrap;
 		position: relative;
-		padding: 0 0 1em ;
+		padding: 1em 0  ;
 		margin: 0;
 	}
 
@@ -2597,15 +2597,15 @@ input[type="checkbox"] + label:before {
 			transition: transform 0.5s ease, opacity 0.5s ease;
 			position: relative;			
 			height: 10em;
-			width: calc(33.33333% - 2.5em);
-			padding: 0.2em 0.2em;
+			width: calc(33.33333% - 5em);
+			padding: 0.5em 0.5em;
 		}
 
 		.tiles article.stylePDF, article.stylePDFActive {
-			width: calc(19% - 2.5em);
+			width: calc(19% - 5em);
 		}
 		.tiles article.styleSim, article.styleSimActive{
-			width: calc(27% - 2.5em);
+			width: calc(27% - 5em);
 		}
 
 			.tiles article > .image {
